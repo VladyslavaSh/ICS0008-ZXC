@@ -1,6 +1,6 @@
-# ICS0008 - ZXC
+# ICS0008 - ZXC - Group project
 
-A project of ZXC web application
+A group project of ZXC web application
 
 ## Project info
 
