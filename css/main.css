@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(211, 205, 196);
+}
+
+nav {
+    background-color: black;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 15px 15px;
+    font-size: 5vh;
+}
+
+nav a:hover {
+    background-color: red;
+}
+
+.logo img {
+    position: absolute;
+    width:7vh;
+    height:7vh;
+    margin: 10px 10px 0px 50px;
+    
+}
+
+/* ############################################################################################################ */
+/* ######################################### FOOTER ########################################################### */
+/* ############################################################################################################ */
+
+footer {
+    background-color: black;
+    height: 3.5vh;
+}
+
+footer p {
+    padding-top: 10px;
+    margin:0;
+    text-align: center;
+    color: white;
+    font-size: 2vh;
+}
