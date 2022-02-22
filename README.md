@@ -10,6 +10,7 @@ A group project of ZXC web application
 
 | Name               | UNI-ID | Rank        |
 | ------------------ | ------ | ----------- |
+| Georgi Tarassov    | getara | Team leader |
 | Dmitri Trubetskoi  | dmtrub | Team member |
-| Georgi Tarassov    | getara | Team member |
 | Vladyslava Shekula | vlshek | Team member |
+| Rene Pihlak        | -      | Reviewer    |
