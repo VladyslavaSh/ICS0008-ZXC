@@ -1,0 +1,67 @@
+
+.slide_1 {
+    /*background: url("../img/index/carousel/products/placeholder1.png");*/
+    background-color: rgba(41, 133, 113, 0.507);
+}
+
+.slide_2 {
+    /*background: url("../img/index/carousel/products/placeholder2.png");*/
+    background-color: rgba(41, 133, 113, 0.507);
+}
+
+.slide_3 {
+    /*background: url("../img/index/carousel/products/placeholder3.png");*/
+    background-color: rgba(41, 133, 113, 0.507);
+}
+
+.slide {
+    height:100vh;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.text {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 40vh;
+}
+
+.text h1 {
+    color: white;
+    text-align:center;
+    font-size: 5vh;
+
+}
+
+.text p {
+    color: white;
+    text-align:center;
+    font-size: 2.5vh;
+}
+
+.pointer {
+    position:absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+}
+
+.pointer img {
+    height: 10vw;
+}
+
+.pointer_right {
+    right:0;
+}
+
+/* ############################################################################################################ */
+/* ######################################### BENEFITS ######################################################### */
+/* ############################################################################################################ */
+
+.benefits h1 {
+    text-align: center;
+    font-size: 4vh;
+}
