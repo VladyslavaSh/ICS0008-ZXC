@@ -1,0 +1,31 @@
+#searchbar {
+  padding-top: 2vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50vh;
+}
+
+#filterbar {
+  float:left;
+  border-right: 1px solid gray;
+}
+
+#content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+#searchresults-outcome {
+  color: gray;
+  font-style: italic;
+}
+
+#searchresults table {
+  width:100%;
+  table-layout: fixed;
+}
+
+#searchresults table td p {
+  text-align: center;
+}
