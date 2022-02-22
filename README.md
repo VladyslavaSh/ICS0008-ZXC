@@ -21,7 +21,7 @@ A group project of ZXC web application
 
 ## Responsibilities
 
-### Georgi Tarassov (Project leader)
+### Georgi Tarassov
 
 - Managing team coordination
 - Managing Discord server (for communication)
@@ -32,16 +32,16 @@ A group project of ZXC web application
 ### Dmitri Trubetskoi
 
 - Writing repository's code
-- Participating in team meeting
+- Participating in team meetings
 
 ### Vladyslava Shekula
 
 - Writing repository's code
-- Participating in team meeting
+- Participating in team meetings
 
 ## Contribution
 
-### Georgi Tarassov (Project leader)
+### Georgi Tarassov
 
 - Created repository
 - Created catalog page of this web application
