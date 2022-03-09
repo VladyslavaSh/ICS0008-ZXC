@@ -9,6 +9,7 @@
                 <li><a href="./about.php">About</a></li>
                 <li><a href="./catalog.php">Order</a></li>
                 <li><a href="./policy.php">Policy</a></li>
+                <li><a href="./rent.php">Rent</a></li>
             </ul>
         </div>
     </nav>
