@@ -1,31 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="author" content="ZXC Team">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/catalog.css">
+    <?php include "./php/head.php"; ?>
+    <link rel="stylesheet" href="./css/catalog.css">
     <title>Catalog</title>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <img src="../img/logo.png" alt="logo">
-        </div>
-        <div>
-          <ul>
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./catalog.html">Order</a></li>
-            <li><a href="./policy.html">Policy</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <?php include "./php/navbar.php"; ?>
     <div id="filterbar">
       <h2>filters</h2>
-      <form class="" action="index.html" method="get">
+      <form class="" action="index.php" method="get">
         <p>price</p>
         <input type="range" name="" value="" min="0" max="10"></br>
         <p>test range 1</p>
@@ -38,7 +22,7 @@
     </div>
     <div id="content">
       <div id="searchbar">
-        <form class="" action="index.html" method="get">
+        <form class="" action="index.php" method="get">
           <input type="text" name="" value="" placeholder="Your search request goes here" size="50">
           <input type="button" name="searchbutton" value="Search">
         </form>
@@ -79,8 +63,6 @@
         </table>
       </div>
     </div>
-    <footer>
-      <p>ZXC Team © 2022-present</p>
-    </footer>
+    <?php include "./php/footer.php"; ?>
   </body>
 </html>
