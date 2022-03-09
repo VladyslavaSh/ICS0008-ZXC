@@ -1,28 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <meta name="author" content="ZXC Team">
-    <link rel="stylesheet" href="../css/main.css">
+  <head>
+    <?php include "./php/head.php"; ?>
     <title>Terms</title>
-</head>
-<body>
-    <header>
-      <nav>
-        <div class="logo">
-          <img src="../img/logo.png" alt="logo">
-        </div>
-        <div>
-          <ul>
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./catalog.html">Order</a></li>
-            <li><a href="./policy.html">Policy</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-
+  </head>
+  <body>
+    <?php include "./php/navbar.php"; ?>
     <h1>Terms and Conditions</h1>
     <p>These Terms and Conditions govern your use of the bike and scooter rental service and website. By visiting the bike and scooter rental website, you accept and agree to the content of these terms and conditions. We reserve the right to change the terms and conditions at any time and it is your responsibility to check them regularly before ordering. This does not affect your statutory rights.</p>
     <p><b>We strongly recommend that you read all terms and policies before using our services.</b></p>
@@ -128,8 +111,6 @@
     <p><a href="tel:+37255939118">Call us</a></p>
     <p><a href="mailto: vlshek@taltech.ee">Write to us</a></p>
 
-    <footer>
-      <p>ZXC Team © 2022-present</p>
-    </footer>
-</body>
+    <?php include "./php/footer.php"; ?>
+  </body>
 </html>

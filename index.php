@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <script src="../js/carousel.js" type="text/javascript"></script>
-    <meta charset="utf-8">
+    <?php include "./php/head.php"; ?>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/carousel.js" type="text/javascript"></script>
     <title>Home</title>
   </head>
   <body>
-    <nav>
-      <div class="logo">
-        <img src="../img/logo.png" alt="logo">
-      </div>
-      <div>
-        <ul>
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./about.html">About</a></li>
-          <li><a href="./catalog.html">Order</a></li>
-          <li><a href="./policy.html">Policy</a></li>
-        </ul>
-      </div>
-    </nav>
-
+    <?php include "./php/navbar.php"; ?>
     <div class="carousel">
 
       <div class="slide slide_1">
@@ -46,11 +32,11 @@
       </div>
 
       <div class="pointer pointer_left">
-        <img src="../img/index/carousel/pointer_left.png" alt="left_pointer">
+        <img src="./img/index/carousel/pointer_left.png" alt="left_pointer">
       </div>
 
       <div class="pointer pointer_right">
-        <img src="../img/index/carousel/pointer_right.png" alt="right_pointer">
+        <img src="./img/index/carousel/pointer_right.png" alt="right_pointer">
       </div>
 
     </div>
@@ -58,10 +44,6 @@
     <div class="benefits">
       <h1> We are working hard for your comfort!</h1>
     </div>
-
-    <footer>
-      <p>ZXC Team © 2022-present</p>
-    </footer>
-
+    <?php include "./php/footer.php"; ?>
   </body>
 </html>
