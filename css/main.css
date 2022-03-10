@@ -1,3 +1,7 @@
+/* ############################################################################################################ */
+/* ######################################### GLOBALS ########################################################## */
+/* ############################################################################################################ */
+
 body {
     margin: 0;
     padding: 0;
@@ -5,16 +9,27 @@ body {
     background-color: rgb(211, 205, 196);
 }
 
+img {
+    display:block;
+}
+
+/* ############################################################################################################ */
+/* ######################################### NAVIGATION ####################################################### */
+/* ############################################################################################################ */
+
 nav {
     background-color: black;
-    overflow: hidden;
 }
 
 nav ul {
+    display:flex;
+    justify-content: center;
+    align-items:center;
     list-style-type: none;
     margin: 0;
     padding: 0;
     text-align: center;
+    height:100px;
 }
 
 nav li {
@@ -28,29 +43,50 @@ nav a {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 15px 15px;
-    font-size: 5vh;
+    padding: 8px 15px;
+    font-size: 50px;
+    border-radius:10px;
+    transition: all 0.3s ease;
 }
 
 nav a:hover {
     background-color: red;
 }
 
-.logo img {
+.logo {
     position: absolute;
-    width:7vh;
-    height:7vh;
-    margin: 10px 10px 0px 50px;
-    
+    margin: 20px 0px 0px 45px;
 }
 
+.logo img {
+    width:60px;
+}
+
+.nav_btn{
+    color: white;
+    display:none;
+    cursor:pointer;
+    position:absolute;
+    right:0;
+    font-size:50px;
+    margin-top:25px;
+    margin-right:40px;
+}
+
+.fluid {
+    width:100%;
+}
+
+#check {
+    display:none;
+}
 /* ############################################################################################################ */
 /* ######################################### FOOTER ########################################################### */
 /* ############################################################################################################ */
 
 footer {
     background-color: black;
-    height: 3.5vh;
+    height: 50px;
 }
 
 footer p {
@@ -59,4 +95,36 @@ footer p {
     text-align: center;
     color: white;
     font-size: 2vh;
+}
+
+/* ############################################################################################################ */
+/* ######################################### MEDIA ############################################################ */
+/* ############################################################################################################ */
+
+@media (max-width: 940px) {
+    nav ul {
+        flex-direction: column;
+        justify-content: normal;
+    }
+
+    nav li {
+        display:none;
+    }
+
+    .nav_btn {
+        display:block;
+    }
+
+    #check:checked ~ ul{
+        padding-top:100px;
+        height:auto;
+    }
+
+    #check:checked ~ ul li{
+        display:block;
+    }
+    #check:checked ~ ul li a{
+        padding: 10px 50px;
+        margin: 10px 0px;
+    }
 }

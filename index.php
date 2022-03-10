@@ -43,6 +43,7 @@
 
     <div class="benefits">
       <h1> We are working hard for your comfort!</h1>
+      <img class="fluid" src="./img/index/people_on_scooters.png" alt="people_on_scooters">
     </div>
     <?php include "./php/footer.php"; ?>
   </body>

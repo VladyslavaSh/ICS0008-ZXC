@@ -110,7 +110,6 @@
 
     <p><a href="tel:+37255939118">Call us</a></p>
     <p><a href="mailto: vlshek@taltech.ee">Write to us</a></p>
-
     <?php include "./php/footer.php"; ?>
   </body>
 </html>
