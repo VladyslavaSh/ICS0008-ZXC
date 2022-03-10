@@ -1,3 +1,6 @@
+.carousel{
+    position: relative;
+}
 
 .slide_1 {
     /*background: url("../img/index/carousel/products/placeholder1.png");*/
