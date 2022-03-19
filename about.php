@@ -6,7 +6,9 @@
   </head>
   <body>
     <?php include "./php/navbar.php"; ?>
-    <h1 style="padding-left:20px;">Here we gonna talk why we are awesome</h1>
+    <div class="main">
+      <h1 style="padding-left:20px;">Here we gonna talk why we are awesome</h1>
+    </div>
     <?php include "./php/footer.php"; ?>
   </body>
 </html>
