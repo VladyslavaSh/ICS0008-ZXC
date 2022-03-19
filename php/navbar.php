@@ -5,7 +5,7 @@
         </div>
         <input type="checkbox" id="check">
         <label for="check" class="nav_btn">
-            <i class="fas fa-bars"></i>
+            <img src="./img/menu_icon.png" alt="menu button">
         </label>
         <ul>
             <li><a href="./index.php">Home</a></li>
