@@ -6,7 +6,7 @@
   </head>
   <body>
     <?php include "./php/navbar.php"; ?>
-    <div class="main">
+    <div class="main" style="padding-left:20px;">>
         <h1>Terms and Conditions</h1>
         <p>These Terms and Conditions govern your use of the bike and scooter rental service and website. By visiting the bike and scooter rental website, you accept and agree to the content of these terms and conditions. We reserve the right to change the terms and conditions at any time and it is your responsibility to check them regularly before ordering. This does not affect your statutory rights.</p>
         <p><b>We strongly recommend that you read all terms and policies before using our services.</b></p>
