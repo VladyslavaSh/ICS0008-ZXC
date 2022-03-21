@@ -41,10 +41,11 @@
 
       </div>
 
-      <div class="benefits">
-        <h1> We are working hard for your comfort!</h1>
-        <img class="fluid" src="./img/index/people_on_scooters.png" alt="people_on_scooters">
-      </div>
+    </div>
+
+    <div class="benefits"> 
+      <h2 id="absolute_h2"> We are working hard for your comfort!<p id="absolute_p">We are the EU No.1 Scooter Brand, <br> stocking a large range of scooters,<br> accesed by a user friendly rent system. <br> We are the right choice, your choice!</p></h2>
+      <img class="fluid" src="./img/index/scooters.png" alt="people_on_scooters">
     </div>
     <?php include "./php/footer.php"; ?>
   </body>
