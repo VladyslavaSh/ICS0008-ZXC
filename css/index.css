@@ -64,7 +64,18 @@
 /* ######################################### BENEFITS ######################################################### */
 /* ############################################################################################################ */
 
-.benefits h1 {
+#absolute_h2 {
+    position: absolute;
     text-align: center;
-    font-size: 4vh;
+    font-size: 2.5vw;
+    text-transform: uppercase;
+    color:white;
+    margin-left:3vw;
+}
+
+#absolute_p {
+    font-size: 2vw;
+    text-transform: none;
+    margin-top:2vw;
+    line-height: 130%;
 }
