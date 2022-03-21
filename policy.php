@@ -2,11 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <?php include "./php/head.php"; ?>
+    <link rel="stylesheet" href="./css/policy.css">
     <title>Terms</title>
   </head>
   <body>
     <?php include "./php/navbar.php"; ?>
-    <div class="main" style="padding-left:20px;">>
+    <div class="main">
+      <div id="terms">
         <h1>Terms and Conditions</h1>
         <p>These Terms and Conditions govern your use of the bike and scooter rental service and website. By visiting the bike and scooter rental website, you accept and agree to the content of these terms and conditions. We reserve the right to change the terms and conditions at any time and it is your responsibility to check them regularly before ordering. This does not affect your statutory rights.</p>
         <p><b>We strongly recommend that you read all terms and policies before using our services.</b></p>
@@ -103,14 +105,13 @@
         <p>We encourage you to leave feedback, comments and questions about the service on our website. We monitor this content regularly and reserve the right to remove, reject or edit it at any time. By submitting information to our website in the form of a review, question or customer comment, you understand that the information you provide is not copyrighted and you authorize it to appear on our website.</p>
 
         <p>If you have any questions or would like to consult with us before making a booking, please contact us using the following "Contact" tab.</p>
-
+      </div>
+      <div id="contactField">
         <h3>Contact</h3>
-        <p><b>Telephone:</b> +37255939118</p>
-        <p><b>E-mail:</b> vlshek@taltech.ee</p>
+        <p><b>Telephone:</b> <a href="tel:+37255939118">+37255939118</a></p>
+        <p><b>E-mail:</b> <a href="mailto: vlshek@taltech.ee">vlshek@taltech.ee</a></p>
         <p><b>Website:</b> https://enos.itcollege.ee</p>
-
-        <p><a href="tel:+37255939118">Call us</a></p>
-        <p><a href="mailto: vlshek@taltech.ee">Write to us</a></p>
+      </div>
     </div>
     <?php include "./php/footer.php"; ?>
   </body>

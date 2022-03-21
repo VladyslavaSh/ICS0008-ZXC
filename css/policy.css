@@ -1,0 +1,54 @@
+.main {
+  margin: 0vh 3vw;
+}
+
+#terms {
+  margin: 0vh 2vw;
+}
+
+#contactField {
+  background-color: #7da89a;
+  padding: 1vh 2vw;
+  border-radius: 2vw 2vw 0px 0px;
+  color: white;
+}
+
+#contactField a {
+  color: white;
+}
+
+/* ############################################################################################################ */
+/* ############################################ TERMS ######################################################### */
+/* ############################################################################################################ */
+
+@media (max-width: 760px) {
+  #terms h1 {
+    margin-left: -1vw;
+    padding: 0.5em 0.5em;
+    border-radius: 0.5em;
+    background-color: rgba(125, 168, 154, 0.7);
+  }
+
+  #terms h2 {
+    margin-left: -0.5vw;
+    padding: 0.25em 0.25em;
+    border-radius: 0.25em;
+    background-color: rgba(125, 168, 154, 0.7);
+  }
+}
+
+@media (min-width: 761px) {
+  #terms h1 {
+    margin-left: -1vw;
+    padding: 0.5em 0.5em;
+    border-radius: 0.5em;
+    background: linear-gradient(90deg, #7da89a, #d3cdc4 80vw);
+  }
+
+  #terms h2 {
+    margin-left: -0.5vw;
+    padding: 0.25em 0.25em;
+    border-radius: 0.25em;
+    background: linear-gradient(90deg, #7da89a, #d3cdc4 40vw);
+  }
+}

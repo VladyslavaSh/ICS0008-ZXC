@@ -5,7 +5,7 @@
   width: 50vh;
 }
 
-#filterbar {
+#filterBar {
   float:left;
   border-right: 1px solid gray;
 }
@@ -16,16 +16,24 @@
   width: 70%;
 }
 
-#searchresults-outcome {
-  color: gray;
-  font-style: italic;
-}
-
 #searchresults table {
   width:100%;
   table-layout: fixed;
 }
 
-#searchresults table td p {
+/* ############################################################################################################ */
+/* ########################################## RESULTS ######################################################### */
+/* ############################################################################################################ */
+
+.searchResult {
+  background: linear-gradient(#ffffff, #f0f2f2);
+  padding: 2vh 2vw;
+  width: 30vw;
+  height: 15vw;
+  border-radius: 1em;
+}
+
+.searchResultImage {
+  float: right;
   text-align: center;
 }

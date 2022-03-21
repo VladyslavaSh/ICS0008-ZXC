@@ -60,14 +60,14 @@ nav a:hover {
 
 .logo {
     position: absolute;
-    margin: 20px 0px 0px 45px;
+    margin: 10px 0px 0px 35px;
 }
 
 .logo img {
-    width:60px;
+    width:80px;
 }
 
-.nav_btn{
+.nav_btn {
     color: white;
     display:none;
     cursor:pointer;
@@ -78,6 +78,10 @@ nav a:hover {
     margin-right:40px;
 }
 
+.nav_btn img {
+    width:50px;
+}
+
 .fluid {
     width:100%;
 }
@@ -85,6 +89,7 @@ nav a:hover {
 #check {
     display:none;
 }
+
 /* ############################################################################################################ */
 /* ######################################### FOOTER ########################################################### */
 /* ############################################################################################################ */
@@ -127,6 +132,7 @@ footer p {
     #check:checked ~ ul li{
         display:block;
     }
+
     #check:checked ~ ul li a{
         padding: 10px 50px;
         margin: 10px 0px;
