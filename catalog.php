@@ -3,69 +3,69 @@
   <head>
     <?php include "./php/head.php"; ?>
     <link rel="stylesheet" href="./css/catalog.css">
-    <title>Catalog</title>
+    <title>Catalog - ZXC</title>
   </head>
   <body>
     <?php include "./php/navbar.php"; ?>
-    <div id="filterbar">
-      <h2>filters</h2>
-      <form class="" action="index.php" method="get">
-        <p>price</p>
-        <input type="range" name="" value="" min="0" max="10"></br>
-        <p>test range 1</p>
-        <input type="range" name="" value="" min="0" max="10"></br>
-        <p>test range 2</p>
-        <input type="range" name="" value="" min="0" max="10"></br>
-        <p>time input 1</p>
-        <input type="time" name="" value="">
-      </form>
-    </div>
     <div class="main">
+      <div id="filterBar">
+        <h2>filters</h2>
+        <form id="filterForm" class="" action="catalog.php" method="get">
+          <p>type</p>
+          <select class="" name="o">
+            <option value="all" selected>all</option>
+            <option value="bikes">bikes</option>
+            <option value="scooters">scooters</option>
+          </select>
+          <p>price</p>
+          <input type="range" name="" value="" min="0" max="10"></br>
+          <p>test range 1</p>
+          <input type="range" name="" value="" min="0" max="10"></br>
+          <p>test range 2</p>
+          <input type="range" name="" value="" min="0" max="10"></br>
+          <p>time input 1</p>
+          <input type="time" name="" value="">
+          <input type="submit" name="submitFilters" value="Apply filters">
+        </form>
+        <input type="button" name="subtract" value="<">
+      </div>
       <div id="content">
+        <div id="officeSelection">
+          <label for="1">{Office 1}</label>
+          <input type="radio" form="filterForm" name="office" value="1">
+          <label for="2">{Office 2}</label>
+          <input type="radio" form="filterForm" name="office" value="2">
+          <label for="3">{Office 3}</label>
+          <input type="radio" form="filterForm" name="office" value="3">
+          <label for="4">{Office 4}</label>
+          <input type="radio" form="filterForm" name="office" value="4">
+          <label for="5">{Office 5}</label>
+          <input type="radio" form="filterForm" name="office" value="5">
+        </div>
         <div id="searchbar">
-          <form class="" action="index.php" method="get">
-            <input type="text" name="" value="" placeholder="Your search request goes here" size="50">
-            <input type="button" name="searchbutton" value="Search">
-          </form>
+          <input type="search" form="filterForm" name="b" value="" placeholder="Your search request goes here" size="50">
+          <select class="" form="filterForm" name="o">
+            <option value="all" selected>popularity</option>
+            <option value="bikes">price (from lowest)</option>
+            <option value="scooters">price (from highest)</option>
+          </select>
+          <input type="button" name="searchbutton" value="Search">
         </div>
         <div id="searchresults">
-          <p id = "searchresults-outcome">Results: %int% (seconds: %float%)</p>
           <table>
             <tr>
-              <td><p>Test 1</p></td>
-              <td><p>Test 2</p></td>
-              <td><p>Test 3</p></td>
-              <td><p>Test 4</p></td>
+              <td><?php include "./php/tpl/search_result.php"?></td>
+              <td><?php include "./php/tpl/search_result.php"?></td>
             </tr>
             <tr>
-              <td><p>Test 5</p></td>
-              <td><p>Test 6</p></td>
-              <td><p>Test 7</p></td>
-              <td><p>Test 8</p></td>
+              <td><?php include "./php/tpl/search_result.php"?></td>
+              <td><?php include "./php/tpl/search_result.php"?></td>
             </tr>
-            <tr>
-              <td><p>Test 9</p></td>
-              <td><p>Test 10</p></td>
-              <td><p>Test 11</p></td>
-              <td><p>Test 12</p></td>
-            </tr>
-            <tr>
-              <td><p>Test 13</p></td>
-              <td><p>Test 14</p></td>
-              <td><p>Test 15</p></td>
-              <td><p>Test 16</p></td>
-            </tr>
-            <tr>
-              <td><p>Test 17</p></td>
-              <td><p>Test 18</p></td>
-              <td><p>Test 19</p></td>
-              <td><p>Test 20</p></td>
-            </tr>
+            <!-- There is a huge mess, so this table will be managed by js script, which will download the results as we go deeper -->
           </table>
         </div>
       </div>
     </div>
-
     <?php include "./php/footer.php"; ?>
   </body>
 </html>
