@@ -19,6 +19,10 @@ A group project of ZXC web application
 
 [Project website (enos)](https://enos.itcollege.ee/~getara/ics0008-zxc/html/)
 
+### Links to other md files
+
+[Contribution of each member](https://gitlab.cs.ttu.ee/getara/ics0008-zxc/-/blob/main/CONTRIBUTION.md)
+
 ## Responsibilities
 
 ### Georgi Tarassov
@@ -38,20 +42,3 @@ A group project of ZXC web application
 
 - Writing repository's code
 - Participating in team meetings
-
-## Contribution
-
-### Georgi Tarassov
-
-- Created repository
-- Created catalog page of this web application
-- Approved main design
-
-### Dmitri Trubetskoi
-
-- Created main style of this web application
-- Created homepage of this web application
-
-### Vladyslava Shekula
-
-- Wrote web application's policy
