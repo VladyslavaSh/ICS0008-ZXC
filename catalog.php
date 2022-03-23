@@ -31,16 +31,16 @@
       </div>
       <div id="content">
         <div id="officeSelection">
-          <label for="1">{Office 1}</label>
-          <input type="radio" form="filterForm" name="office" value="1">
-          <label for="2">{Office 2}</label>
-          <input type="radio" form="filterForm" name="office" value="2">
-          <label for="3">{Office 3}</label>
-          <input type="radio" form="filterForm" name="office" value="3">
-          <label for="4">{Office 4}</label>
-          <input type="radio" form="filterForm" name="office" value="4">
-          <label for="5">{Office 5}</label>
-          <input type="radio" form="filterForm" name="office" value="5">
+          <label for="office1">{Office 1}</label>
+          <input type="radio" id="office1" form="filterForm" name="office" value="1">
+          <label for="office2">{Office 2}</label>
+          <input type="radio" id="office2" form="filterForm" name="office" value="2">
+          <label for="office3">{Office 3}</label>
+          <input type="radio" id="office3" form="filterForm" name="office" value="3">
+          <label for="office4">{Office 4}</label>
+          <input type="radio" id="office4" form="filterForm" name="office" value="4">
+          <label for="office5">{Office 5}</label>
+          <input type="radio" id="office5" form="filterForm" name="office" value="5">
         </div>
         <div id="searchbar">
           <input type="search" form="filterForm" name="b" value="" placeholder="Your search request goes here" size="50">
