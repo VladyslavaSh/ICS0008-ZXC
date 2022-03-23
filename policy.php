@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <?php include "./php/head.php"; ?>
+    <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/policy.css">
     <title>Terms</title>
   </head>
   <body>
-    <?php include "./php/navbar.php"; ?>
+    <?php include "./php/tpl/navbar.php"; ?>
     <div class="main">
       <div id="terms">
         <h1>Terms and Conditions</h1>
@@ -113,6 +113,6 @@
         <p><b>Website:</b> https://enos.itcollege.ee</p>
       </div>
     </div>
-    <?php include "./php/footer.php"; ?>
+    <?php include "./php/tpl/footer.php"; ?>
   </body>
 </html>

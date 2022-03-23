@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <?php include "./php/head.php"; ?>
+    <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/catalog.css">
     <title>Catalog - ZXC</title>
   </head>
   <body>
-    <?php include "./php/navbar.php"; ?>
+    <?php include "./php/tpl/navbar.php"; ?>
     <div class="main">
       <div id="filterBar">
         <h2>filters</h2>
@@ -66,6 +66,6 @@
         </div>
       </div>
     </div>
-    <?php include "./php/footer.php"; ?>
+    <?php include "./php/tpl/footer.php"; ?>
   </body>
 </html>
