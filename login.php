@@ -8,18 +8,6 @@
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
     <div class="main">
-      <p>This is the login/register page</p>
-      <div class="loginForm">
-        <form action="login.php" method="post">
-          <label for="logEmail">Email: </label>
-          <input type="text" id="logEmail" name="email" value="" required>
-          <br/>
-          <label for="logPassword">Password: </label>
-          <input type="password" id="logPassword" name="password" value="" required>
-          <br/>
-          <input type="submit" name="auth" value="Login">
-        </form>
-      </div>
       <div class="registerForm">
         <form action="login.php" method="post">
           <label for="regNameFirst">First name: </label>
@@ -37,10 +25,29 @@
           <label for="regPasswordRepeat">Confirm password: </label>
           <input type="password" id="regPasswordRepeat" name="passwordRepeat" value="" required>
           <br/>
-          <input type="submit" name="auth" value="Register">
+          <input type="submit" name="auth" id ="reg" value="Register">
+        </form>
+      </div>
+
+      <div class="loginForm">
+        <form action="login.php" method="post">
+          <label for="logEmail">Email: </label>
+          <input type="text" id="logEmail" name="email" value="" required>
+          <br/>
+          <label for="logPassword">Password: </label>
+          <input type="password" id="logPassword" name="password" value="" required>
+          <br/>
+          <input type="submit" name="auth" id="log" value="Login">
         </form>
       </div>
     </div>
     <?php include "./php/tpl/footer.php"; ?>
   </body>
 </html>
+
+
+<?php
+
+
+
+?>

@@ -1,3 +1,41 @@
 .main {
-  margin: 0vh 1vw;
+  margin-top: 10vh;
+  display:flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.main label {
+  text-transform: uppercase;
+  display: inline-block;
+  width: 200px;
+  color: #777777;
+  padding-left:10px;
+  border-left: 5px solid black;
+  margin-top: 1vh;
+}
+
+/*input {
+  margin-top: 1vh;
+}*/
+
+.loginForm {
+  margin-left:10vw;
+}
+
+
+/* ############################################################################################################ */
+/* ######################################### MEDIA ############################################################ */
+/* ############################################################################################################ */
+
+@media (max-width: 940px) {
+  .main {
+    align-items: center;
+    flex-direction: column;
+    justify-content: start;
+  }
+  .loginForm {
+    margin-left:0;
+    margin-top:10vh;
+  }
 }
