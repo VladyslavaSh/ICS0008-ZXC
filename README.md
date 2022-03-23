@@ -17,7 +17,7 @@ A group project of ZXC web application
 
 ## Links
 
-[Project website (enos)](https://enos.itcollege.ee/~getara/ics0008-zxc/html/)
+[Project website (enos)](https://enos.itcollege.ee/~getara/ics0008-zxc/)
 
 ### Links to other md files
 
