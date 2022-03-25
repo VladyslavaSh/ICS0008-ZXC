@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 function check(){
-    setTimeout(()=>{urlCheck(window.location.hash)},10);
-    
+    setTimeout(()=>{urlCheck(window.location.hash)},0);
 }
 
 function urlCheck(hash) {
@@ -10,7 +9,7 @@ function urlCheck(hash) {
     for(let form of forms.children) {
         id = form.getAttribute("id")
         if(id === href) {
-            btns = document.getElementsByClassName("button");
+            let btns = document.getElementsByClassName("button");
             for(let btn of btns) {
                 btn.classList.remove("active");
                 if(btn.firstChild.getAttribute("href") === hash) {
@@ -26,8 +25,7 @@ function urlCheck(hash) {
 }
 
 let forms = document.getElementById("forms");
-hash = window.location.hash;
-if (hash == true) urlCheck();
+if (window.location.hash) urlCheck(window.location.hash);
 document.getElementsByClassName("regLogBtn")[0].addEventListener("click", check);
 
 
