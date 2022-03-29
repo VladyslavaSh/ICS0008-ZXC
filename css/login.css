@@ -4,19 +4,8 @@
   margin: 0 auto;
   margin-top: 15vh;
   padding:50px;
-  background-color:rgba(37, 65, 87, 0.9);
-}
-
-.content a {
-  font-size:40px;
-  text-decoration: none;
-  transition:.5s ease;
-  display:block;
-  text-align: center;
-  padding:15px 30px;
-  cursor:pointer;
-  text-transform: uppercase;
-  color:white;
+  background-color:rgba(49, 85, 112);
+  margin-bottom: 30px;
 }
 
 .regLogBtn {
@@ -24,22 +13,27 @@
   
 }
 
-.button {
+button {
+  transition:.5s ease;
+  cursor:pointer;
+  color:white;
+  text-transform: uppercase;
+  padding:15px 30px;
+  font-size:40px;
   width:50%;
   border:0;
-  padding: 0;
   background-color: rgb(172, 166, 157);
 }
 
 .active {
-  background-color: #1ab188;
+  background-color: #23b890;
 }
 
 .content h1 {
   text-transform: uppercase;
   font-size: 40px;
   margin: 20px 0;
-  color:rgb(96, 194, 164);
+  color:rgb(55, 173, 173);
   margin-top:0;
   margin-bottom: 40px;
 }
@@ -57,7 +51,7 @@
   background-color: rgba(37, 65, 87, 0.4);
 }
 
-#registerForm {
+#Register {
   display:none;
 }
 
@@ -74,9 +68,10 @@
   border: 0;
   font-size:30px;
   text-transform: uppercase;
-  background-color: #1ab188;
+  background-color: #23b890;
   color:white;
   font-size:30px;
+  border-radius: 30px;
 }
 
 #formResult {

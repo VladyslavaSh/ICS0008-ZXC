@@ -1,21 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-function check(){
-    setTimeout(()=>{urlCheck(window.location.hash)},0);
-}
+function tab_switch(e) {
+    formResult.innerHTML = "";
+    let prsBtn = e.path[0]; // pressed button
+    let btns = e.path[1]; // all buttons in .regLogBtn div
 
-function urlCheck(hash) {
-    href = hash.slice(1);
+    for(let btn of btns.children) {
+        btn.classList.remove("active");
+    }
+    prsBtn.classList.add("active");
+
     for(let form of forms.children) {
-        id = form.getAttribute("id")
-        if(id === href) {
-            let btns = document.getElementsByClassName("button");
-            for(let btn of btns) {
-                btn.classList.remove("active");
-                if(btn.firstChild.getAttribute("href") === hash) {
-                    btn.classList.add("active");
-                }
-            }
+        if(prsBtn.innerHTML === form.getAttribute("id")) {
             form.style.display = "block";
         }
         else {
@@ -24,9 +20,7 @@ function urlCheck(hash) {
     }
 }
 
+let formResult = document.getElementById("formResult");
 let forms = document.getElementById("forms");
-if (window.location.hash) urlCheck(window.location.hash);
-document.getElementsByClassName("regLogBtn")[0].addEventListener("click", check);
-
-
+document.getElementsByClassName("regLogBtn")[0].addEventListener("click", tab_switch);
 });
