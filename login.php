@@ -1,5 +1,5 @@
 <?php
-  $result = 0;
+  $formLoad = 0;
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     function main(){
       $fields = ["email", "password", "passwordRepeat", "nameFirst", "nameLast"];
@@ -119,7 +119,6 @@
     }
     $result = main();
 
-    $formLoad = 0;
     if ($result==6||$result==7) {
       $formLoad = 1;
     }
