@@ -1,4 +1,5 @@
-<?php 
+<?php
+  $result = 0;
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     function main(){
       $fields = ["email", "password", "passwordRepeat", "nameFirst", "nameLast"];
@@ -6,9 +7,9 @@
       $submitTypes = ["Log In", "Register"];
 
       if(!isset($_POST["auth"]) || empty($_POST["auth"])) return 1;
-    
+
       $submit = $_POST["auth"];
-    
+
       function submit_value_check(&$submit, &$submitTypes){
         foreach($submitTypes as $type) {
           if ($type == $submit) {
@@ -16,15 +17,15 @@
           }
         }
       }
-    
+
       if(submit_value_check($submit, $submitTypes)) return 2;
-    
+
       // DELETING UNNECESSARY FIELDS FOR THE FORM TYPE "Log In"
       if($submit == "Log In") {
         $fields = \array_diff($fields, ["passwordRepeat", "nameFirst", "nameLast"]);
         $required = \array_diff($required, ["passwordRepeat"]);
       }
-    
+
       function isset_check(&$fields){
         foreach($fields as $field) {
             if(!isset($_POST[$field])) {
@@ -32,9 +33,9 @@
             }
         }
       }
-    
+
       if(isset_check($fields)) return 3;
-    
+
       function empty_check(&$required){
         foreach($required as $field) {
             if(empty(trim($_POST[$field]))) {
@@ -42,9 +43,9 @@
             }
         }
       }
-    
+
       if(empty_check($required)) return 4;
-    
+
       function email_check(&$email) {
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return 1;
@@ -54,9 +55,9 @@
             return 1;
         }
       }
-    
+
       if(email_check($_POST["email"])) return 5;
-    
+
       function validate_names($list){
         foreach($list as $str){
             if (preg_match('/[0-9\@\:\.\;\|\!\#\}\$\{\=\\&\*\(\)\+\_\%\" "]+/', $str) || (strlen($str) > 20))
@@ -65,20 +66,20 @@
             }
         }
       }
-      
+
       function pass_check(&$pass, &$passRep) {
         if($pass != $passRep) {
           return 1;
         }
       }
-    
+
       function temp_csv_write() {
         $result_csv = [$_POST["nameFirst"], $_POST["nameLast"], $_POST["email"] , $_POST["password"]];
         $f = fopen("csv_file.csv", "a");
         fputcsv($f, $result_csv, ";");
         fclose($f);
       }
-    
+
       if($submit == "Register") {
         if(validate_names([$_POST["nameFirst"], $_POST["nameLast"]])) return 6;
         if(pass_check($_POST["password"], $_POST["passwordRepeat"])) return 7;
@@ -117,6 +118,11 @@
       */
     }
     $result = main();
+
+    $formLoad = 0;
+    if ($result==6||$result==7) {
+      $formLoad = 1;
+    }
   }
 ?>
 <!DOCTYPE html>
@@ -126,14 +132,23 @@
     <link rel="stylesheet" href="./css/login.css">
     <script src="./js/login.js" type="text/javascript"></script>
     <title>Login - ZXC</title>
+    <style>
+      <?php if($formLoad==0) {
+        echo "#Register";
+      } else {
+        echo "#Log-In";
+      }?> {
+        display:none;
+      }
+    </style>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
     <div class="main">
       <div class="content">
         <div class="regLogBtn">
-          <button type="button" class="active">Log In</button>
-          <button type="button">Register</button>
+          <button type="button" for="Log-In" <?php if ($formLoad==0) echo 'class="active"'; ?> >Log In</button>
+          <button type="button" for="Register" <?php if ($formLoad==1) echo 'class="active"';?>>Register</button>
         </div>
         <div id="formResult">
           <?php
@@ -166,7 +181,7 @@
           ?>
         </div>
         <div id="forms">
-          <div id="Log In">
+          <div id="Log-In">
             <form action="login.php" method="post">
               <h1>Hello again!</h1>
               <label for="logEmail">Email</label>

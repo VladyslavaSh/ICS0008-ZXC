@@ -11,7 +11,7 @@ function tab_switch(e) {
     prsBtn.classList.add("active");
 
     for(let form of forms.children) {
-        if(prsBtn.innerHTML === form.getAttribute("id")) {
+        if(prsBtn.getAttribute("for") === form.getAttribute("id")) {
             form.style.display = "block";
         }
         else {
