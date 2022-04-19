@@ -1,7 +1,20 @@
+<?php 
+  session_start();
+?>
+
 <?php
+
   $formLoad = 0;
+
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     function main(){
+
+      require_once "db_connect.php";
+      $link = mysqli_connect($server, $user, $pass, $db);
+      if (!$link) {
+        die("Connection failed: ".mysqli_connect_error());
+      }
+
       $fields = ["email", "password", "passwordRepeat", "nameFirst", "nameLast"];
       $required = ["email", "password", "passwordRepeat"];
       $submitTypes = ["Log In", "Register"];
@@ -11,11 +24,7 @@
       $submit = $_POST["auth"];
 
       function submit_value_check(&$submit, &$submitTypes){
-        foreach($submitTypes as $type) {
-          if ($type == $submit) {
-            return 0;
-          }
-        }
+        if(!in_array($submit, $submitTypes)) return 1;
       }
 
       if(submit_value_check($submit, $submitTypes)) return 2;
@@ -67,59 +76,90 @@
         }
       }
 
-      function pass_check(&$pass, &$passRep) {
+      function pass_req(&$pass) {
+        if (strlen($pass) < 8) return 1;
+      }
+
+      function pass_rep(&$pass, &$passRep) {
         if($pass != $passRep) {
           return 1;
         }
       }
 
-      function temp_csv_write() {
-        $result_csv = [$_POST["nameFirst"], $_POST["nameLast"], $_POST["email"] , $_POST["password"]];
-        $f = fopen("csv_file.csv", "a");
-        fputcsv($f, $result_csv, ";");
-        fclose($f);
+      function registration($link){
+
+        $email = $_POST["email"];
+        $pass = password_hash($_POST["password"], PASSWORD_DEFAULT);
+        $first_name = $_POST["nameFirst"];
+        $last_name = $_POST["nameLast"];
+
+        // duplicate check
+        $query = "SELECT email FROM account WHERE email=?";
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+
+        if(mysqli_stmt_num_rows($stmt) == 1) {
+          return 1;
+        }
+        mysqli_stmt_close($stmt);
+
+        // actual registration
+        $query = "INSERT INTO account (email, pass, FirstName, LastName) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "ssss", $email, $pass, $first_name, $last_name);
+        mysqli_stmt_execute($stmt);
+        $_SESSION["email"] = $email; // giving session ID as entered email as its unique
+        mysqli_stmt_close($stmt);
       }
 
       if($submit == "Register") {
         if(validate_names([$_POST["nameFirst"], $_POST["nameLast"]])) return 6;
-        if(pass_check($_POST["password"], $_POST["passwordRepeat"])) return 7;
-        temp_csv_write();
+        if(pass_req($_POST["password"])) return 7;
+        if(pass_rep($_POST["password"], $_POST["passwordRepeat"])) return 8;
+        if(registration($link)) return 9;
         header("Location: index.php");
       }
 
-      function temp_csv_read() {
-        $handle = fopen("csv_file.csv", "r");
-        while (($data = fgetcsv($handle)) !== FALSE) {
-          $data = explode(";", $data[0]);
-          if($data[2] == $_POST["email"] && $data[3] == $_POST["password"]) {
-            return 1;
+      function authorization($link) {
+        $query = "SELECT pass FROM account WHERE email=?";
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+
+        $email = $_POST["email"];
+        $pass = $_POST["password"];
+
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt); // mysqli_stmt_num_rows function requires mysqli_stmt_store_result to work
+
+        if(mysqli_stmt_num_rows($stmt) == 1) {
+          mysqli_stmt_bind_result($stmt, $hashedPass); // "pass" from sql data assigned to php $hashedPass
+          mysqli_stmt_fetch($stmt); // variables from mysqli_stmt_bind_result cannot be accessed until this function is used
+          if(password_verify($pass, $hashedPass)) {
+            $_SESSION["email"] = $email; // giving session ID as entered email as its unique
+            return 1; 
           }
         }
+        mysqli_stmt_close($stmt);
       }
 
       if($submit == "Log In") {
-        //authorization($login, $pass);
-        if(temp_csv_read()) {
+        if(authorization($link)) {
           header("Location: index.php");
         }
         else {
-          return 8;
+          return 10;
         }
       }
 
-      /*
-      function authorization(&$login, &$pass) {
-        $request = "select * from loginform where user='".$login."' AND pass='".$pass."' limit 1";
-        $reqResult = mysql_query($request);
-        if(mysql_num_rows($reqResult) != 1) {
-          return 1;
-        }
-      }
-      */
+      mysqli_close($link);
+      return 0;
     }
+
     $result = main();
 
-    if ($result==6||$result==7) {
+    if ($result==6||$result==7||$result==8||$result==9) {
       $formLoad = 1;
     }
   }
@@ -149,9 +189,9 @@
           <button type="button" for="Log-In" <?php if ($formLoad==0) echo 'class="active"'; ?> >Log In</button>
           <button type="button" for="Register" <?php if ($formLoad==1) echo 'class="active"';?>>Register</button>
         </div>
-        <div id="formResult">
           <?php
             if($_SERVER["REQUEST_METHOD"] == "POST"){
+              if ($result != 0) echo '<div id="formResult">';
               if ($result == 1){
                 echo "Submit button name was changed";
               }
@@ -171,14 +211,20 @@
                 echo "Name can contain only - and ' from special characters and only 20 characters long";
               }
               elseif ($result == 7){
-                echo "Passwords doesn't match";
+                echo "Password should be at least 8 characters long";
               }
               elseif ($result == 8){
+                echo "Passwords doesn't match";
+              }
+              elseif ($result == 9){
+                echo "Email is already taken";
+              }
+              elseif ($result == 10){
                 echo "Email or password is incorrect";
               }
+              echo "</div>";
             }
           ?>
-        </div>
         <div id="forms">
           <div id="Log-In">
             <form action="login.php" method="post">

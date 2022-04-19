@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 function tab_switch(e) {
-    formResult.innerHTML = "";
+    if(formResult) {
+        formResult.innerHTML = "";
+    }
     let prsBtn = e.path[0]; // pressed button
     let btns = e.path[1]; // all buttons in .regLogBtn div
 
