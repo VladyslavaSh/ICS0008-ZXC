@@ -6,7 +6,6 @@
     <h2>{MODEL_NAME}</h2>
   </div>
   <div class="searchResultText">
-    <p><span>{STARS_CURRENT}</span><span>{STARS_REMAIN}</span><span>{RATING}</span> ({RATED}) </p>
     <p>Type: {TYPE}</p>
     <p>{SHORT_DESCRIPTION}</p>
     <h3>{PRICE_HR}€ per hour</h3>

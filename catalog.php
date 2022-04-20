@@ -4,6 +4,7 @@
     <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/catalog.css">
     <title>Catalog - ZXC</title>
+    <script src="./js/multiRangeSlider.js" type="text/javascript" defer></script>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
@@ -21,11 +22,24 @@
           <input type="range" name="" value="" min="0" max="10"></br>
           <p>test range 1</p>
           <input type="range" name="" value="" min="0" max="10"></br>
+          <input type="number" name="" value="">
           <p>test range 2</p>
           <input type="range" name="" value="" min="0" max="10"></br>
-          <p>time input 1</p>
-          <input type="time" name="" value="">
-          <input type="submit" name="submitFilters" value="Apply filters">
+          <input type="number" name="" value="">
+          <input type="submit" value="Apply filters">
+          <p>price</p>
+          <div id="priceSlider" class="multiRangeSlider">
+            <input type="range" class="inputLeft" min="0" max="100" value="25">
+            <input type="range" class="inputRight" min="0" max="100" value="75">
+            <div class="slider">
+              <div class="track"></div>
+              <div class="range"></div>
+              <div class="thumbLeft"></div>
+              <div class="thumbRight"></div>
+            </div>
+            <input type="number" name="priceMin" value="">
+            <input type="number" name="priceMax" value="">
+          </div>
         </form>
         <input type="button" name="subtract" value="<">
       </div>

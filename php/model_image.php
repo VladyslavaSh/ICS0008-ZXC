@@ -3,7 +3,7 @@
     if (!empty($_GET["model"])) {
       $model_id = intval($_GET["model"]);
       require_once("./lib/dbconnector.php");
-      
+
       try {
         $dbc = new DBConnection();
       } catch (Exception $err) {
@@ -11,7 +11,7 @@
         die();
       }
 
-      $cursor = $dbc->execute("SELECT image FROM zxc_model WHERE id = ?",$model_id);
+      $cursor = $dbc->execute("SELECT image FROM zxc_model WHERE id = ?",[$model_id]);
       if ($cursor === FALSE) {
         unset($dbc);
         echo "Error loading the image";
