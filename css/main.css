@@ -18,34 +18,45 @@ img {
     display:block;
 }
 
+li, a, button {
+    text-decoration: none;
+}
+
+ul {
+    margin:0;
+    padding:0;
+}
+
 /* ############################################################################################################ */
 /* ######################################### NAVIGATION ####################################################### */
 /* ############################################################################################################ */
 
-nav {
+header {
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    margin: 0;
+    padding: 0;
+    height:100px;
+    text-align: center;
     background-color: black;
 }
 
-nav ul {
+header ul {
     display:flex;
-    justify-content: center;
-    align-items:center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    height:100px;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 nav li {
     display: inline-block;
 }
 
-nav a {
+
+header a {
     display: block;
     color: white;
     text-align: center;
-    text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
     padding: 8px 15px;
@@ -54,17 +65,41 @@ nav a {
     transition: all 0.3s ease;
 }
 
-nav a:hover {
+header a:hover {
     background-color: red;
 }
 
-.logo {
-    position: absolute;
-    margin: 10px 0px 0px 35px;
+#logo {
+    width:80px;
 }
 
-.logo img {
-    width:80px;
+#logo_link {
+    padding:0;
+    transition:none;
+}
+
+#logo_link:hover {
+    background-color: initial;
+}
+
+#avatar {
+    width:73px;
+}
+
+#avatar_link {
+    padding:0;
+    margin-left:100px;
+    transition:none;
+}
+
+#avatar_link:hover {
+    background-color: initial;
+}
+
+
+#LogIn, #LogOut {
+    color:#23b890;
+    margin-left:50px;
 }
 
 .nav_btn {
@@ -73,8 +108,6 @@ nav a:hover {
     cursor:pointer;
     position:absolute;
     right:0;
-    font-size:50px;
-    margin-top:25px;
     margin-right:40px;
 }
 
@@ -110,31 +143,56 @@ footer p {
 /* ######################################### MEDIA ############################################################ */
 /* ############################################################################################################ */
 
-@media (max-width: 940px) {
-    nav ul {
-        flex-direction: column;
-        justify-content: normal;
+@media (max-width: 1300px) {
+
+    #logo_link {
+        margin-left:50px;
+        margin-top:10px;
+        margin-bottom: 10px;
+        width: 80px;
     }
 
-    nav li {
+    header {
+        height:auto;
+        align-items: normal;
+        justify-content: normal;
+        flex-direction: column;
+    }
+
+    nav ul {
         display:none;
     }
 
     .nav_btn {
         display:block;
+        margin-top:25px;
     }
 
-    #check:checked ~ ul{
-        padding-top:100px;
-        height:auto;
-    }
-
-    #check:checked ~ ul li{
+    #check:checked ~ nav ul{
         display:block;
     }
 
-    #check:checked ~ ul li a{
-        padding: 10px 50px;
+    #check:checked ~ nav ul li{
+        display:block;
+        width:50%;
+        margin-left:25%;
+    }
+
+    #check:checked ~ nav ul li a{
+        padding: 25px 50px;
         margin: 10px 0px;
+    }
+
+    #avatar {
+        display:initial;
+    }
+}
+
+@media (max-width: 530px) {
+
+    #check:checked ~ nav ul li{
+        display:block;
+        width:100%;
+        margin:0;
     }
 }
