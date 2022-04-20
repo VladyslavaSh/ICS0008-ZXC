@@ -7,8 +7,18 @@
 
 #filterBar {
   float:left;
+  width: 300px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-right: 1px solid gray;
+  height: 100%;
+  background-color: rgba(255,255,255,0.3);
 }
+
+#filterBar form > p {
+  font-size: 20px;
+}
+
 
 #content {
   margin-left: auto;
@@ -21,12 +31,26 @@
   table-layout: fixed;
 }
 
+.inputSpan {
+  background: linear-gradient(#ffffff, #f0f2f2);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.inputSpan input {
+  background: linear-gradient(#ffffff, #f0f2f2);
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
 /* ############################################################################################################ */
 /* ##################################### MULTI-RANGE-SLIDER ################################################### */
 /* ############################################################################################################ */
 
 .multiRangeSlider {
   width: 300px;
+  height: 100px;
 }
 
 .multiRangeSlider > .slider {
@@ -61,8 +85,8 @@
 .multiRangeSlider > .slider > .range {
   position:absolute;
   z-index: 2;
-  left:25%;
-  right:25%;
+  left:0%;
+  right:0%;
   top:0;
   bottom: 0;
   border-radius: 5px;
@@ -70,12 +94,12 @@
 }
 
 .multiRangeSlider > .slider > .thumbLeft {
-  left: 25%;
+  left: 0%;
   transform: translate(-15px, -10px);
 }
 
 .multiRangeSlider > .slider > .thumbRight {
-  right: 25%;
+  right: 0%;
   transform: translate(15px, -10px);
 }
 
@@ -104,6 +128,20 @@
   border-radius: 0;
   border: 0 none;
   pointer-events: all;
+  -webkit-appearance: none;
+}
+
+.multiRangeSlider > .sliderLabel {
+  margin-top: 20px;
+  margin-left:50px;
+  margin-right: 50px;
+}
+
+.multiRangeSlider > .sliderLabel > .sliderSpan input {
+  width: 50px;
+}
+
+.multiRangeSlider > .sliderLabel > .sliderSpan input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
