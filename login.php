@@ -4,7 +4,7 @@
 
 <?php
 
-  if ($_SESSION["email"]) header("Location: index.php");
+  if (isset($_SESSION["email"])) header("Location: index.php");
 
   $formLoad = 0;
 
