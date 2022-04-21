@@ -72,7 +72,11 @@
       </div>
 
       <div id="map"></div>
-      <script src="./js/map.js" type="text/javascript"></script>
+      <script src="./js/map.js" type="text/javascript">
+        <?php
+        echo 'let mk = $offices;';
+        ?>
+      </script>
       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOfpvJuLB7hrJM06k0xW6oXez6bwChQhE&callback=initMap"></script>
 
     </div>

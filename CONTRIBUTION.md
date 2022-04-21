@@ -7,10 +7,12 @@ aka. here is who and what contributed to this project
 - Created repository
 - Created catalog page
 - Approved main design
-- Created all main icons
+- Created most of main icons
 - Stylized policy page
 - Created template for search results in catalog page
 - Wrote this file
+- Created database connector library
+- Created script to make double range sliders
 
 ## Dmitri Trubetskoi
 
@@ -20,6 +22,8 @@ aka. here is who and what contributed to this project
 - Created templates of navbar, head and footer
 - Made that navbar, head and footer are included in every page
 - Created a script for homepage
+- Created login system
+- Installed google map api
 
 ## Vladyslava Shekula
 
