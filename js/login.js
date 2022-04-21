@@ -4,8 +4,8 @@ function tab_switch(e) {
     if(formResult) {
         formResult.innerHTML = "";
     }
-    let prsBtn = e.path[0]; // pressed button
-    let btns = e.path[1]; // all buttons in .regLogBtn div
+    let prsBtn = e.target; // pressed button
+    let btns = e.target.parentNode; // all buttons in .regLogBtn div
 
     for(let btn of btns.children) {
         btn.classList.remove("active");

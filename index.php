@@ -19,10 +19,9 @@
       array_push($offices, $result);
     }
   }
-  //print_r($offices);
   mysqli_stmt_close($stmt);
   mysqli_close($link);
-?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

@@ -5,7 +5,13 @@ function initMap(){
     }
     let map = new google.maps.Map(document.getElementById("map"), map_options);
 
-    let markers = mk;
+    let markers = [
+        {lat:59.421973, lng:24.792532},
+        {lat:59.427475, lng:24.743891}, 
+        {lat:59.405282, lng:24.679969},
+        {lat:59.426340, lng:24.723678},
+        {lat:59.443092, lng:24.863402},
+    ];
 
     function createMarker(markers) {
         for(let i = 0; i < markers.length; i++) {

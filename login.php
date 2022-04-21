@@ -4,6 +4,8 @@
 
 <?php
 
+  if (isset($_SESSION["email"])) header("Location: index.php");
+
   $formLoad = 0;
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -94,7 +96,7 @@
         $last_name = $_POST["nameLast"];
 
         // duplicate check
-        $query = "SELECT email FROM account WHERE email=?";
+        $query = "SELECT email FROM zxc_account WHERE email=?";
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
@@ -106,7 +108,7 @@
         mysqli_stmt_close($stmt);
 
         // actual registration
-        $query = "INSERT INTO account (email, pass, FirstName, LastName) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO zxc_account (email, pass, first_name, last_name) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "ssss", $email, $pass, $first_name, $last_name);
         mysqli_stmt_execute($stmt);
@@ -123,7 +125,7 @@
       }
 
       function authorization($link) {
-        $query = "SELECT pass FROM account WHERE email=?";
+        $query = "SELECT pass FROM zxc_account WHERE email=?";
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "s", $email);
 
