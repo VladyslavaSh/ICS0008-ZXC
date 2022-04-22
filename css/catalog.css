@@ -1,28 +1,58 @@
-#searchbar {
+#searchBar {
   padding-top: 2vh;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20vw;
+  margin-right: 20vw;
   width: 50vh;
+  border-radius: 10px;
+  padding: 10px;
+  background: linear-gradient(#ffffff, #f0f2f2);
 }
 
-#filterBar {
-  float:left;
-  width: 300px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-right: 1px solid gray;
-  height: 100%;
-  background-color: rgba(255,255,255,0.3);
+#searchBarS {
+  font-size: 20px;
+  border: none;
 }
 
 #filterBar form > p {
   font-size: 20px;
 }
 
+#resetButton {
+  font-size: 1.5em;
+  border-radius: 10px;
+  border: none;
+  background-color: #d21111;
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  transition: background-color 0.2s;
+  width:100px;
+  /*box-shadow: 0 0 0 5px rgba(210,17,17,0.3);*/
+}
 
-#content {
-  margin-left: 370px;
-  margin-right: 10px;
+#resetButton:hover {
+  background-color: red;
+}
+
+#resetButton:active {
+  background-color: #700f0f;
+}
+
+#submitButton {
+  font-size: 1.5em;
+  border-radius: 10px;
+  border: none;
+  background-color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  transition: background-color 0.2s;
+  width:190px;
+}
+
+#submitButton:hover {
+  background-color: #7da89a;
+}
+
+#submitButton:active {
+  background-color: #23b890;
 }
 
 .inputSpan {
@@ -38,29 +68,108 @@
   font-size: 20px;
 }
 
+.inputLable label {
+  display: block;
+  border-radius: 20px;
+  padding: 2px 10px;
+  width: 280px;
+  background-color: white;
+  transition: background-color 0.2s;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.inputLable label:hover {
+  background-color: #7da89a;
+}
+
+.inputLable input:checked + label {
+  background-color: #23b890;
+}
+
+.inputLable label:active {
+  background-color: #3d785a;
+}
+
+.inputLableST {
+  font-size: 0.6em;
+}
+
 /* ############################################################################################################ */
-/* ##################################### FILTER-HIDE-BUTTON ################################################### */
+/* ########################################### MEDIA ########################################################## */
 /* ############################################################################################################ */
 
-@media (min-width: 1000px) {
+@media (min-width: 1020px) {
+  #content {
+    margin-left: max(365px, 18vw);
+    margin-right: 10px;
+    transition: margin-left 0.4s, margin-right 0.4s;
+  }
+
+  #filterBar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    float: left;
+    height: 100vh;
+  }
+
+  #filterBarMain {
+    width: 300px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+    height: 100vh;
+    background-color: rgba(255,255,255,0.4);
+    transition: margin-left 0.4s;
+  }
+
   #hideFilters {
     position: absolute;
-    margin-left: 310px;
+    margin-left: 320px;
     height: 100%;
     width: 30px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.2);
     transition: background-color 0.2s;
+    transition: margin-left 0.4s;
     text-align: center;
-    line-height: 100px;
+    line-height: 90vh;
   }
 
   #hideFilters:hover {
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.8);
   }
 
   #hideFilters:active {
-    background-color: rgba(200,200,200,0.5);
+    background-color: rgba(200,200,200,0.6);
   }
+
+  #hideFilters::after {
+    content: "<<";
+  }
+
+  #checkFilter:checked ~ #filterBar > #hideFilters::after {
+    content: ">>";
+  }
+
+
+  #checkFilter:checked ~ #filterBar > #filterBarMain {
+    margin-left: -320px;
+  }
+
+  #checkFilter:checked ~ #filterBar > #hideFilters {
+    margin-left: 0;
+  }
+
+  #checkFilter:checked ~ #content {
+    margin-left: 18vw;
+    margin-right: 18vw;
+  }
+}
+
+@media (max-width: 1019px) {
+
 }
 
 /* ############################################################################################################ */
@@ -168,18 +277,40 @@
 /* ########################################## RESULTS ######################################################### */
 /* ############################################################################################################ */
 
+@media (min-width: 1020px) {
+  .searchResult {
+    width: 60vw;
+    height: 300px;
+  }
+
+  .searchResultImage {
+    float: right;
+    text-align: center;
+    margin-top: -4.2em;
+  }
+}
+
+@media (max-width: 1019px) {
+  .searchResult {
+    width: min(90vw, 300px);
+  }
+
+  .searchResult h2 {
+    text-align: center;
+  }
+}
+
 .searchResult {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 20px;
   background: linear-gradient(#ffffff, #f0f2f2);
   padding: 2vh 2vw;
-  width: 90%;
-
-  height: 15vw;
   border-radius: 1em;
 }
 
 .searchResultImage {
-  float: right;
-  text-align: center;
+   text-align: center;
+}
+
+.searchResultImage img {
+  height: min(90vw, 300px);
 }

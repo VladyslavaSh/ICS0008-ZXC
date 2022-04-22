@@ -29,9 +29,7 @@ function setRightValue(event) {
 let multiRangeSliders = document.getElementsByClassName("multiRangeSlider");
 
 for (slider of multiRangeSliders) {
-  console.log(slider);
   let x = slider.getElementsByClassName("inputLeft");
-  console.log(x);
   let inputLeft = slider.getElementsByClassName("inputLeft")[0];
   let inputRight = slider.getElementsByClassName("inputRight")[0];
   inputLeft.addEventListener("input",setLeftValue);
