@@ -21,14 +21,8 @@
 
 
 #content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-}
-
-#searchresults table {
-  width:100%;
-  table-layout: fixed;
+  margin-left: 370px;
+  margin-right: 10px;
 }
 
 .inputSpan {
@@ -42,6 +36,31 @@
   border: none;
   outline: none;
   font-size: 20px;
+}
+
+/* ############################################################################################################ */
+/* ##################################### FILTER-HIDE-BUTTON ################################################### */
+/* ############################################################################################################ */
+
+@media (min-width: 1000px) {
+  #hideFilters {
+    position: absolute;
+    margin-left: 310px;
+    height: 100%;
+    width: 30px;
+    background-color: rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+    text-align: center;
+    line-height: 100px;
+  }
+
+  #hideFilters:hover {
+    background-color: rgba(255,255,255,0.7);
+  }
+
+  #hideFilters:active {
+    background-color: rgba(200,200,200,0.5);
+  }
 }
 
 /* ############################################################################################################ */
@@ -150,9 +169,12 @@
 /* ############################################################################################################ */
 
 .searchResult {
+  margin-top: 5%;
+  margin-bottom: 5%;
   background: linear-gradient(#ffffff, #f0f2f2);
   padding: 2vh 2vw;
-  width: 30vw;
+  width: 90%;
+
   height: 15vw;
   border-radius: 1em;
 }

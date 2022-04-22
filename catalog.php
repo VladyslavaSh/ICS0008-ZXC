@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
 ?>
 
@@ -14,6 +14,8 @@
     <?php include "./php/tpl/navbar.php"; ?>
     <div class="main">
       <div id="filterBar">
+        <input type="checkbox" id="checkFilter" hidden>
+        <label for="checkFilter" id="hideFilters"><<</label>
         <h2>Filters</h2>
         <form id="filterForm" class="" action="catalog.php" method="get">
           <div id="officeSelection">
@@ -54,7 +56,6 @@
           <input type="button" name="reset" value="reset">
           <input type="submit" value="Apply filters">
         </form>
-        <input type="button" name="subtract" value="<">
       </div>
       <div id="content">
         <div id="searchbar">
@@ -67,17 +68,11 @@
           <input type="button" name="searchbutton" value="Search">
         </div>
         <div id="searchresults">
-          <table>
-            <tr>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-            </tr>
-            <tr>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-            </tr>
+          <?php include "./php/tpl/search_result.php"?>
+          <?php include "./php/tpl/search_result.php"?>
+          <?php include "./php/tpl/search_result.php"?>
+          <?php include "./php/tpl/search_result.php"?>
             <!-- There is a huge mess, so this table will be managed by js script, which will download the results as we go deeper -->
-          </table>
         </div>
       </div>
     </div>
