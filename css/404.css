@@ -34,8 +34,8 @@
     margin-top:30px;
     text-decoration: none;
     color: white;
-    font-size:50px;
-    padding: 8px 15px;
+    font-size:70px;
+    padding: 16px 100px;
     border-radius:10px;
     transition: all 0.3s ease;
     background-color: #2b8d73;
@@ -43,4 +43,80 @@
 
 .content a:hover {
     background-color: #23b890;
+}
+
+/* ############################################################################################################ */
+/* ######################################### MEDIA ############################################################ */
+/* ############################################################################################################ */
+
+@media (max-width:650px) {
+    .content h1, .content a {
+        font-size:45px;
+    }
+    .content .text {
+        font-size:200px;
+    }
+    .content p {
+        font-size:30px;
+    }
+    .content a {
+        padding: 14px 80px;
+    }
+}
+
+@media (max-width:500px) {
+    .content h1, .content a {
+        font-size:35px;
+    }
+    .content .text {
+        font-size:150px;
+    }
+    .content p {
+        font-size:20px;
+    }
+    .content a {
+        padding: 14px 80px;
+    }
+}
+
+@media (max-width:350px) {
+    .content h1, .content a {
+        font-size:25px;
+    }
+    .content .text {
+        font-size:100px;
+    }
+    .content p {
+        font-size:15px;
+    }
+}
+
+@media (max-width:250px) {
+    .content h1, .content a {
+        font-size:20px;
+    }
+    .content .text {
+        font-size:80px;
+    }
+    .content p {
+        font-size:13px;
+    }
+    .content a {
+        padding: 14px 60px;
+    }
+}
+
+@media (max-width:200px) {
+    .content h1, .content a {
+        font-size:15px;
+    }
+    .content .text {
+        font-size:70px;
+    }
+    .content p {
+        font-size:10px;
+    }
+    .content a {
+        padding: 14px 50px;
+    }
 }

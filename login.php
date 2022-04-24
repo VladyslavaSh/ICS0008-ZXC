@@ -4,7 +4,10 @@
 
 <?php
 
-  if (isset($_SESSION["email"])) header("Location: index.php");
+  if (isset($_SESSION["email"])) {
+    header("Location: index.php");
+    die();
+  } 
 
   $formLoad = 0;
 
@@ -90,10 +93,10 @@
 
       function registration($link){
 
-        $email = $_POST["email"];
+        $email = trim($_POST["email"]);
         $pass = password_hash($_POST["password"], PASSWORD_DEFAULT);
-        $first_name = $_POST["nameFirst"];
-        $last_name = $_POST["nameLast"];
+        $first_name = trim($_POST["nameFirst"]);
+        $last_name = trim($_POST["nameLast"]);
 
         // duplicate check
         $query = "SELECT email FROM zxc_account WHERE email=?";
@@ -121,7 +124,12 @@
         if(pass_req($_POST["password"])) return 7;
         if(pass_rep($_POST["password"], $_POST["passwordRepeat"])) return 8;
         if(registration($link)) return 9;
+        if(isset($_SESSION["redirect"])) {
+          header ("Location: ".$_SESSION["redirect"]);
+          die();
+        }
         header("Location: index.php");
+        die();
       }
 
       function authorization($link) {
@@ -129,7 +137,7 @@
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "s", $email);
 
-        $email = $_POST["email"];
+        $email = trim($_POST["email"]);
         $pass = $_POST["password"];
 
         mysqli_stmt_execute($stmt);
@@ -140,19 +148,25 @@
           mysqli_stmt_fetch($stmt); // variables from mysqli_stmt_bind_result cannot be accessed until this function is used
           if(password_verify($pass, $hashedPass)) {
             $_SESSION["email"] = $email; // giving session ID as entered email as its unique
-            return 1; 
           }
+          else {
+            return 1;
+          }
+        }
+        else {
+          return 1;
         }
         mysqli_stmt_close($stmt);
       }
 
       if($submit == "Log In") {
-        if(authorization($link)) {
-          header("Location: index.php");
+        if(authorization($link)) return 10;
+        if(isset($_SESSION["redirect"])) {
+          header ("Location: ".$_SESSION["redirect"]);
+          die();
         }
-        else {
-          return 10;
-        }
+        header("Location: index.php");
+        die();
       }
 
       mysqli_close($link);
