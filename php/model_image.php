@@ -23,7 +23,8 @@
         header("Content-type: image/png");
         echo $image_arr[0];
       } else {
-        echo "Image not found";
+        $content = file_get_contents("../img/logo.png");
+        echo $content;
       }
 
       $dbc->close_cursor($cursor);

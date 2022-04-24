@@ -429,6 +429,11 @@
   box-shadow: 0 0 0 7px rgba(66, 230, 177, 0.4);
 }
 
+.searchResult input:active {
+  background-color: #12b681;
+  box-shadow: 0 0 0 7px rgba(26, 170, 117, 0.4);
+}
+
 .searchResultType {
   font-style: italic;
   color: gray;
