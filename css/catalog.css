@@ -1,20 +1,63 @@
-#searchBar {
-  padding-top: 2vh;
-  margin-left: 20vw;
-  margin-right: 20vw;
-  width: 50vh;
-  border-radius: 10px;
-  padding: 10px;
-  background: linear-gradient(#ffffff, #f0f2f2);
+#content {
+  padding-top: 20px;
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
-#searchBarS {
-  font-size: 20px;
+#searchBar {
+  font-size:0px;
+}
+
+#searchBarInput {
+  display: inline-block;
+  border-radius: 20px 0 0 20px;
+  padding: 10px;
+}
+
+#searchBarInput label {
+  display: inline-block;
+  font-size:15px;
+  width: 50px;
+  color:gray;
+  margin-block:0 0;
+}
+
+#searchBarS, #searchBarBy, #searchBarSB {
+  display: inline-block;
   border: none;
+  font-size: 20px;
+  padding: 5px;
+}
+
+#searchBarS, #searchBarBy {
+  outline: none;
+}
+
+#searchBarBy {
+  width:205px;
+}
+
+#searchBarSB {
+  background-color: #23b890;
+  border-radius: 0 20px 20px 0;
+  text-align: center;
+  font-weight: bolder;
+  transition: background-color 0.2s, box-shadow 0.2s ease-in;
+}
+
+#searchBarSB:hover {
+  background-color: #42e6b1;
+  box-shadow: 0 0 0 3px rgba(66,230,177,0.1);
+}
+
+#searchBarSB:active {
+  background-color: #42e6b1;
+  box-shadow: 0 0 0 3px rgba(66,230,177,0.4);
 }
 
 #filterBar form > p {
   font-size: 20px;
+  padding-left: 10px;
 }
 
 #resetButton {
@@ -55,14 +98,22 @@
   background-color: #23b890;
 }
 
+#hideFilters:hover {
+  background-color: rgba(255,255,255,0.8);
+}
+
+#filterBarMain {
+  background-color: rgba(255,255,255,0.4);
+}
+
 .inputSpan {
-  background: linear-gradient(#ffffff, #f0f2f2);
+  background: white;
   padding: 10px;
   border-radius: 10px;
 }
 
 .inputSpan input {
-  background: linear-gradient(#ffffff, #f0f2f2);
+  background: white;
   border: none;
   outline: none;
   font-size: 20px;
@@ -107,12 +158,22 @@
     transition: margin-left 0.4s, margin-right 0.4s;
   }
 
+  #searchBar {
+    width: 50vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+
+  #searchBarS {
+    width: calc(50vw - 335px);
+  }
+
   #filterBar {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     float: left;
-    height: 100vh;
+    height: max(100vh, 900px);
   }
 
   #filterBarMain {
@@ -120,8 +181,7 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 1px;
-    height: 100vh;
-    background-color: rgba(255,255,255,0.4);
+    height: max(100vh, 900px);
     transition: margin-left 0.4s;
   }
 
@@ -131,14 +191,9 @@
     height: 100%;
     width: 30px;
     background-color: rgba(255,255,255,0.2);
-    transition: background-color 0.2s;
-    transition: margin-left 0.4s;
+    transition: background-color 0.2s, margin-left 0.4s;
     text-align: center;
     line-height: 90vh;
-  }
-
-  #hideFilters:hover {
-    background-color: rgba(255,255,255,0.8);
   }
 
   #hideFilters:active {
@@ -169,7 +224,83 @@
 }
 
 @media (max-width: 1019px) {
+  #searchBar {
+    width: 90vw;
+  }
 
+  #filterBarMain {
+    display: none;
+    width: 300px;
+    padding-left: calc(50vw - 150px);
+    padding-right: calc(50vw - 150px);
+    padding-top: 1px;
+    padding-bottom: 10px;
+  }
+
+  #hideFilters {
+    display: block;
+    width: 100vw;
+    background-color: rgba(255,255,255,0.2);
+    transition: background-color 0.2s;
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  #checkFilter:checked ~ #filterBar > #filterBarMain {
+    display: block;
+  }
+
+  #hideFilters::after {
+    content: "↓ Filters ↓";
+  }
+
+  #checkFilter:checked ~ #filterBar > #hideFilters::after {
+    content: "↑ Filters ↑";
+  }
+
+  #filterBarMain h2 {
+    display: none;
+  }
+}
+
+@media (max-width: 1019px) and (min-width:500px) {
+  #searchBarS {
+    width: calc(90vw - 335px);
+  }
+}
+
+@media (min-width: 500px) {
+  #searchBarInput {
+    background: linear-gradient(#ffffff, #f0f2f2);
+  }
+
+  #searchBarSB {
+    padding: 15.5px 20px;
+  }
+
+  #searchBarS, #searchBarBy {
+    background: linear-gradient(#ffffff, #f0f2f2);
+  }
+}
+
+@media (max-width:499px) {
+  #searchBar {
+    width: calc(90vw - 50px);
+  }
+
+  #searchBarInput {
+    background-color: white;
+  }
+
+  #searchBarS, #searchBarBy {
+    width: calc(90vw - 70px);
+  }
+
+  #searchBarSB {
+    position: absolute;
+    padding: 40.5px 20px;
+  }
 }
 
 /* ############################################################################################################ */
@@ -277,6 +408,41 @@
 /* ########################################## RESULTS ######################################################### */
 /* ############################################################################################################ */
 
+.searchResult h2 {
+  margin-block: 0 0;
+}
+
+.searchResultButton input {
+  border:none;
+  outline:none;
+  font-size:25px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #42e6b1;
+  padding: 5px 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 0 5px rgba(66, 230, 177, 0.2);
+  transition: box-shadow 0.2s ease-in;
+}
+
+.searchResult input:hover {
+  background-color: #32d6a1;
+  box-shadow: 0 0 0 7px rgba(66, 230, 177, 0.4);
+}
+
+.searchResultType {
+  font-style: italic;
+  color: gray;
+}
+
+.searchResultButton > .smallPortion {
+  color: #d08e20;
+}
+
+.searchResultButton > .empty {
+  color: #d21717;
+}
+
+
 @media (min-width: 1020px) {
   .searchResult {
     width: 60vw;
@@ -286,24 +452,62 @@
   .searchResultImage {
     float: right;
     text-align: center;
-    margin-top: -4.2em;
+    margin-top: -1.7em;
+  }
+
+  .searchResultDesc {
+    height: 120px;
+  }
+
+  .searchResultButton input{
+    margin-right: 15px;
+  }
+
+  .searchResultButton form {
+    display: inline;
+  }
+
+  .searchResultButton p{
+    display: inline;
+    position:relative;
+    top: -3px;
   }
 }
 
 @media (max-width: 1019px) {
   .searchResult {
-    width: min(90vw, 300px);
+    width: max(60vw, 300px);
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .searchResult h2 {
+  .searchResult h2, .searchResult p, .searchResult h3 {
     text-align: center;
+  }
+
+  .searchResultDesc {
+    text-align: justify;
+  }
+
+  .searchResultButton form {
+    text-align: center;
+  }
+
+  .searchResultButton input {
+    padding: 5px min(20vw, 100px);
+  }
+
+  .searchResultImage img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
 }
 
 .searchResult {
   margin-top: 20px;
   background: linear-gradient(#ffffff, #f0f2f2);
-  padding: 2vh 2vw;
+  padding: 2vh 20px;
   border-radius: 1em;
 }
 

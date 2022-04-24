@@ -75,7 +75,7 @@
               </div>
             </div>
             <div class="">
-              <input type="button" id="resetButton" name="reset" value="Reset">
+              <input type="button" id="resetButton" value="Reset">
               <input type="submit" id="submitButton" value="Apply filters">
             </div>
           </form>
@@ -83,13 +83,16 @@
       </div>
       <div id="content">
         <div id="searchBar">
-          <input type="search" form="filterForm" id="searchBarS" name="search" value="" placeholder="Your search request goes here" size="50">
-          <select class="" form="filterForm" name="filterBy">
-            <option value="all" selected>popularity</option>
-            <option value="bikes">price (from lowest)</option>
-            <option value="scooters">price (from highest)</option>
-          </select>
-          <input type="button" name="searchbutton" value="Search">
+          <div id="searchBarInput">
+            <input type="search" form="filterForm" id="searchBarS" name="search" value="" placeholder="search">
+            <label for="searchBarBy">sort by:</label>
+            <select class="" form="filterForm" id="searchBarBy" name="filterBy">
+              <option value="all" selected>popularity</option>
+              <option value="bikes">price (from lowest)</option>
+              <option value="scooters">price (from highest)</option>
+            </select>
+          </div>
+          <input type="button" id="searchBarSB" value=">">
         </div>
         <div id="searchresults">
           <?php include "./php/tpl/search_result.php"?>
