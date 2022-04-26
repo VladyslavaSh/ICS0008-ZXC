@@ -16,7 +16,7 @@ $patterns = [
     'phone' => "^$|^[[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{1}[-\s\.]?[0-9]{1,9}]*$"
 ];
 
-$_SESSION['email'] = 'zxclord@gmail.com';
+//$_SESSION['email'] = 'zxclord@gmail.com';
 
 $server = "anysql.itcollege.ee";
 $user = "ICS0008_WT_2";

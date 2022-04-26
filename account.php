@@ -12,7 +12,7 @@
 
 session_start();
 
-$_SESSION['email'] = 'zxclord@gmail.com';
+//$_SESSION['email'] = 'zxclord@gmail.com';
 
 //require_once "db_connect.php";
 
