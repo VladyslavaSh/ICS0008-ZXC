@@ -1,11 +1,15 @@
+<?php 
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-  <?php include "./php/head.php"; ?>
+  <?php include "./php/tpl/head.php"; ?>
     <title>About us</title>
   </head>
   <body>
-    <?php include "./php/navbar.php"; ?>
+    <?php include "./php/tpl/navbar.php"; ?>
     <div class="main" style="padding-left:20px;">
         <h1>Here we gonna talk why we are awesome</h1>
         <h2>History of the company:</h2>
@@ -28,6 +32,6 @@
         </ul>
         <img class="image_center" src="img/about/bicycle2.jpg" width="600" height="350">
     </div>
-    <?php include "./php/footer.php"; ?>
+    <?php include "./php/tpl/footer.php"; ?>
   </body>
 </html>
