@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -10,12 +14,7 @@
 
 <?php
 
-$_SESSION['email'] = 'zxclord@gmail.com';
-
-$server = "anysql.itcollege.ee";
-$user = "ICS0008_WT_2";
-$pass = "6ec9e61f3528";
-$db = "ICS0008_2";
+require_once("db_connect.php");
 
 $db_con = new mysqli($server, $user, $pass, $db);
 $ses_email = $_SESSION['email'];
