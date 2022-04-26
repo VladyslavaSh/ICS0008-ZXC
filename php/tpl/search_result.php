@@ -3,19 +3,21 @@
     <h2>{MODEL_NAME}</h2>
   </div>
   <div class="searchResultImage">
-    <img src="./img/logo.png" alt="">
+    <img src="./model_image.php?model={MODEL}" alt="Model {MODEL_NAME}">
+    <!--- <img src="./php/model_image.php?model={MODEL}" alt="Model {MODEL_NAME}"> --->
   </div>
   <div class="searchResultText">
     <p class="searchResultType">Type: {TYPE}</p>
     <p class="searchResultDesc">{SHORT_DESCRIPTION}</p>
     <h3>{PRICE_HR}€ per hour</h3>
     <div class="searchResultButton">
-      <form class="" action="./rent.php" method="get">
-        <input type="submit" name="" value="Rent now!" disabled="disabled">
-        <input type="text" name="id" value="3" hidden>
-        <input type="office" name="office" value="" hidden>
+      <form action="./rent.php" method="get">
+        <input type="submit" name="" value="Rent now!" {IS_DISABLED}>
+        <input type="text" name="model" value="{MODEL}" hidden>
+        <input type="office" name="office" value="{OFFICE}" hidden>
       </form>
-      <p class="smallPortion">There is {num} left!</p>
+      {AVAILABILITY}
+      <p class="smallPortion">There is {PRODUCT_NUM} left!</p>
     </div>
   </div>
 </div>

@@ -35,7 +35,7 @@
         <label for="checkFilter" id="hideFilters"></label>
         <div id="filterBarMain">
           <h2>Filters</h2>
-          <form id="filterForm" class="" action="catalog.php" method="get">
+          <form id="filterForm" action="catalog.php" method="get">
             <p>Take-out office</p>
             <div id="officeSelection">
               <?php
@@ -43,7 +43,7 @@
               ?>
             </div>
             <p>Type</p>
-            <div class="">
+            <div>
               <div class="inputLable">
                 <input type="radio" id="typeAll" name="type" value="all" hidden>
                 <label for="typeAll">All</label>
@@ -69,12 +69,12 @@
               </div>
               <div class="sliderLabel">
                 <span class="sliderSpan">
-                  <span class="inputSpan"><input type="number" name="priceMin" value="">€</span> -
-                  <span class="inputSpan"><input type="number" name="priceMax" value="">€</span>
+                  <span class="inputSpan"><input type="number" id="priceMin" name="priceMin">€</span> -
+                  <span class="inputSpan"><input type="number" id="priceMax" name="priceMax">€</span>
                 </span>
               </div>
             </div>
-            <div class="">
+            <div>
               <input type="button" id="resetButton" value="Reset">
               <input type="submit" id="submitButton" value="Apply filters">
             </div>
@@ -84,12 +84,12 @@
       <div id="content">
         <div id="searchBar">
           <div id="searchBarInput">
-            <input type="search" form="filterForm" id="searchBarS" name="search" value="" placeholder="search">
+            <input type="search" form="filterForm" id="searchBarS" name="search" placeholder="search">
             <label for="searchBarBy">sort by:</label>
-            <select class="" form="filterForm" id="searchBarBy" name="filterBy">
-              <option value="all" selected>popularity</option>
-              <option value="bikes">price (from lowest)</option>
-              <option value="scooters">price (from highest)</option>
+            <select form="filterForm" id="searchBarBy" name="filterBy">
+              <option value="popularity" selected>popularity</option>
+              <option value="price ASC">price (from lowest)</option>
+              <option value="price DESC">price (from highest)</option>
             </select>
           </div>
           <input type="button" id="searchBarSB" value=">">
