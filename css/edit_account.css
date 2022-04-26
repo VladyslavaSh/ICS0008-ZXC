@@ -1,0 +1,75 @@
+input {
+    display: block;
+    margin-bottom: 8px;
+    height: 30px;
+    font-size: 16px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid gray;
+}
+
+input:focus {
+    outline: none;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto;
+    padding: 40px 0px 80px;
+}
+
+input[type="submit"] {
+    width: 50%;
+    margin: 0 auto;
+    border: 2px solid gray;
+    cursor: pointer;
+    background-color: rgba(41, 133, 113, 0.507);
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 12px;
+    max-width: 400px;
+    min-width: 100px;
+}
+
+input[type="submit"]:hover {
+    background-color:#b38b1e;
+}
+
+label{
+    font-size: larger;
+}
+
+h2{
+    text-align: center;
+    font-size: xx-large;
+    font-family: sans-serif;
+    text-shadow: 2px 2px 5px gray;
+}
+
+h3{
+    text-align: center;
+    font-family: sans-serif;
+    color: red;
+}
+
+.editpass {
+    width: 50%;
+    border: 2px solid gray;
+    cursor: pointer;
+    background-color: rgba(41, 133, 113, 0.507);
+    color: black;
+    font-size: larger;
+    border-radius: 12px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    max-width: 400px;
+    min-width: 100px;
+    margin: 30px auto;
+}
+
+.editpass:hover {
+    background-color:#b38b1e;
+}
