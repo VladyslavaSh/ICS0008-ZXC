@@ -42,9 +42,9 @@
 
       function isset_check(&$fields){
         foreach($fields as $field) {
-            if(!isset($_POST[$field])) {
-              return 1;
-            }
+          if(!isset($_POST[$field])) {
+            return 1;
+          }
         }
       }
 
@@ -52,13 +52,24 @@
 
       function empty_check(&$required){
         foreach($required as $field) {
-            if(empty(trim($_POST[$field]))) {
-                return 1;
-            }
+          if(empty(trim($_POST[$field]))) {
+              return 1;
+          }
         }
       }
 
       if(empty_check($required)) return 4;
+
+      function html_inj(&$fields) {
+        foreach($fields as $field) {
+          $clear = strip_tags($_POST[$field]);
+          if($clear != $_POST[$field]) {
+            return 1;
+          }
+        }
+      }
+
+      if(html_inj($fields)) return 11;
 
       function email_check(&$email) {
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -74,15 +85,15 @@
 
       function validate_names($list){
         foreach($list as $str){
-            if (preg_match('/[0-9\@\:\.\;\|\!\#\}\$\{\=\\&\*\(\)\+\_\%\" "]+/', $str) || (strlen($str) > 20))
-            {
-                return 1;
-            }
+          if (preg_match('/[0-9\@\:\.\;\|\!\#\}\$\{\=\\&\*\(\)\+\_\%\" "]+/', $str) || (strlen($str) > 20))
+          {
+            return 1;
+          }
         }
       }
 
       function pass_req(&$pass) {
-        if (strlen($pass) < 8) return 1;
+        if (strlen($pass) < 8 || strlen($pass) > 255) return 1;
       }
 
       function pass_rep(&$pass, &$passRep) {
@@ -224,10 +235,10 @@
                 echo "Incorrect email type or more than 50 symbols";
               }
               elseif ($result == 6){
-                echo "Name can contain only - and ' from special characters and only 20 characters long";
+                echo "Name can contain only - and ' from special characters and at most 20 characters long";
               }
               elseif ($result == 7){
-                echo "Password should be at least 8 characters long";
+                echo "Password should be between 8 and 255 characters long";
               }
               elseif ($result == 8){
                 echo "Passwords doesn't match";
@@ -238,7 +249,10 @@
               elseif ($result == 10){
                 echo "Email or password is incorrect";
               }
-              echo "</div>";
+              elseif ($result == 11){
+                echo "No html tags allowed (even in password)";
+              }
+              if ($result != 0) echo "</div>";
             }
           ?>
         <div id="forms">
@@ -257,9 +271,9 @@
             <form action="login.php" method="post">
               <h1>Sign up</h1>
               <label for="regNameFirst">First name</label>
-              <input type="text" id="regNameFirst" name="nameFirst" pattern="^[A-Za-zÀ-ÿа-яА-ЯёЁ ,.-']+$" maxlength="20" value="">
+              <input type="text" id="regNameFirst" name="nameFirst" pattern="^[A-Za-zÀ-ÿа-яА-ЯёЁ,.'-]+$" maxlength="20" value="">
               <label for="regNameLast">Last name</label>
-              <input type="text" id="regNameLast" name="nameLast" pattern="^[A-Za-zÀ-ÿа-яА-ЯёЁ ,.-']+$" maxlength="20" value="">
+              <input type="text" id="regNameLast" name="nameLast" pattern="^[A-Za-zÀ-ÿа-яА-ЯёЁ,.'-]+$" maxlength="20" value="">
               <label for="regEmail">Email</label>
               <input type="email" id="regEmail" name="email" value="" maxlength="50" required>
               <label for="regPassword">Password</label>

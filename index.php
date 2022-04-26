@@ -39,23 +39,26 @@
     <div class="main">
       <div class="carousel">
         <div class="slide slide_1">
+          <img class="fluid" src="./img/index/carousel/products/slide1.jpg" alt="promote_1">
           <div class="text">
-            <h1>Placeholder h1 text slide 1</h1>
-            <p>Placeholder p text slide 1</p>
+            <h1>Jack and Jill</h1>
+            <p>They are in love with our products</p>
           </div>
         </div>
 
         <div class="slide slide_2">
+        <img class="fluid" src="./img/index/carousel/products/slide2.jpg" alt="promote_2">
           <div class="text">
-            <h1>Placeholder h1 text slide 2</h1>
-            <p>Placeholder p text slide 2</p>
+            <h1>Mary</h1>
+            <p>Enjoying the total comfort of our bicycles</p>
           </div>
         </div>
 
         <div class="slide slide_3">
+        <img class="fluid" src="./img/index/carousel/products/slide3.jpg" alt="promote_3">
           <div class="text">
-            <h1>Placeholder h1 text slide 3</h1>
-            <p>Placeholder p text slide 3</p>
+            <h1>Michael</h1>
+            <p>Discovers the world with our scooter</p>
           </div>
         </div>
 

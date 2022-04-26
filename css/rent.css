@@ -2,13 +2,20 @@
 /* ######################################### GLOBALS ########################################################## */
 /* ############################################################################################################ */
 
-.content {
+.content, .formResult {
     text-align: center;
     background-color: rgba(49, 85, 112);
     display:flex;
     padding:40px;
     max-width:85%;
-    margin: 15vh auto 10vh auto;
+    margin: 0px auto 0px auto;
+}
+
+.formResult {
+    display:block;
+    padding: 40px 40px 0px 40px;
+    font-size: 35px;
+    color:red;
 }
 
 .content h1, p {
@@ -210,7 +217,7 @@ textarea {
     .info p {
         font-size:22px;
     }
-    label {
+    label, .formResult {
         font-size:25px;
     }
     input {
@@ -251,6 +258,10 @@ textarea {
         max-width: 100%;
         flex-direction: column;
     }
+    .formResult {
+        margin: 0;
+        max-width:100%;
+    }
     .model {
         width:100%;
         margin: 0px auto;
@@ -278,7 +289,7 @@ textarea {
     .info p {
         font-size:19px;
     }
-    label {
+    label, .formResult {
         font-size:22px;
     }
     input {
@@ -317,7 +328,7 @@ textarea {
     .info p {
         font-size:17px;
     }
-    label {
+    label, .formResult {
         font-size:20px;
     }
     input {
@@ -353,7 +364,7 @@ textarea {
     .info p {
         font-size:15px;
     }
-    label {
+    label, .formResult {
         font-size:18px;
     }
     input {
@@ -393,7 +404,7 @@ textarea {
     .info p {
         font-size:13px;
     }
-    label {
+    label, .formResult {
         font-size:16px;
     }
     input {
@@ -426,7 +437,7 @@ textarea {
     .info p {
         font-size:11px;
     }
-    label {
+    label, .formResult {
         font-size:14px;
     }
     input, textarea {
@@ -453,7 +464,7 @@ textarea {
     .info p {
         font-size:9px;
     }
-    label {
+    label, .formResult {
         font-size:12px;
     }
     input, textarea {
@@ -489,7 +500,7 @@ textarea {
     .info p {
         font-size:9px;
     }
-    label {
+    label, .formResult {
         font-size:12px;
     }
     input, textarea {
@@ -519,7 +530,7 @@ textarea {
     .info p {
         font-size:9px;
     }
-    label {
+    label, .formResult {
         font-size:12px;
     }
     input, textarea {

@@ -1,0 +1,120 @@
+.content {
+    display:flex;
+    flex-direction: column;
+    margin: 5vh auto 10vh auto;
+    max-width: 90%;
+}
+
+.content h1, h2 {
+    text-align: center;
+}
+
+.content h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+.content h1 {
+    font-size: 55px;
+}
+
+.content h2 {
+    font-size: 35px;
+}
+
+.content p {
+    margin: 0 3vw;
+    margin-top:20px;
+    line-height: 1.3em;
+}
+
+.content p, .content li {
+    font-size:25px;
+}
+
+.content img {
+    width:50%;
+    margin: 3vh auto 0 auto;
+}
+
+.content ul {
+    display:flex;
+    flex-direction: column;
+    margin:0 auto;
+    list-style: none;
+}
+
+.content li {
+    margin-top: 1vh;
+}
+
+
+/* ############################################################################################################ */
+/* ######################################### MEDIA ############################################################ */
+/* ############################################################################################################ */
+
+@media (max-width:1920px) {
+    .content h1{
+        font-size:35px;
+    }
+    .content h2{
+        font-size:25px;
+    }
+    .content p, .content li {
+        font-size:18px;
+    }
+}
+
+@media (max-width:1024px) {
+    .content img {
+        width:80%;
+    }
+}
+
+@media (max-width:768px) {
+    .content img {
+        width:100%;
+    }
+    .content h1{
+        font-size:30px;
+    }
+    .content h2{
+        font-size:20px;
+    }
+    .content p, .content li {
+        font-size:15px;
+    }
+    .content p {
+        line-height: 1em;
+    }
+}
+
+@media (max-width:600px) {
+    .content img {
+        width:100%;
+    }
+    .content h1{
+        font-size:25px;
+    }
+    .content h2{
+        font-size:15px;
+    }
+    .content p, .content li {
+        font-size:12px;
+    }
+}
+
+@media (max-width:425px) {
+    .content img {
+        width:100%;
+    }
+    .content h1{
+        font-size:20px;
+    }
+    .content h2{
+        font-size:13px;
+    }
+    .content p, .content li {
+        font-size:10px;
+    }
+}

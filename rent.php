@@ -3,7 +3,6 @@
 ?>
 
 <?php
-
   if (!isset($_SESSION["email"])) {
     $_SESSION["redirect"] = $_SERVER['REQUEST_URI'];
     header("Location: login.php");
@@ -12,7 +11,7 @@
 
   function main() {
 
-    require_once "db_connect.php";
+    require "db_connect.php";
     $link = mysqli_connect($server, $user, $pass, $db);
     if (!$link) {
       die("Connection failed: ".mysqli_connect_error());
@@ -26,7 +25,7 @@
       die();
     }
 
-    function isset_check(&$fields){
+    function set_fields(&$fields){
       foreach($fields as $field) {
           if(!isset($_GET[$field])) {
             $_GET[$field] = "";
@@ -34,9 +33,9 @@
       }
     }
 
-    isset_check($fields);
+    set_fields($fields);
 
-    function empty_check(&$required){
+    function required_check(&$required){
       foreach($required as $field) {
           if(empty(trim($_GET[$field]))) {
               return 1;
@@ -44,23 +43,23 @@
       }
     }
 
-    if(empty_check($required)) redirect();
+    if(required_check($required)) redirect();
 
     $model = $_GET["model"];
     $office_ID = $_GET["office"];
     $data = [];
     
     function office_check($link, $office_ID) {
-      $query = "SELECT name, address, post FROM zxc_offices WHERE ID=?";
+      $query = "SELECT ID, name, address, post FROM zxc_offices WHERE ID=?";
       $stmt = mysqli_prepare($link, $query);
       mysqli_stmt_bind_param($stmt, "i", $office_ID);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_store_result($stmt);
   
       if(mysqli_stmt_num_rows($stmt) == 1) {
-        mysqli_stmt_bind_result($stmt, $office_name, $address, $post);
+        mysqli_stmt_bind_result($stmt, $office_id, $office_name, $address, $post);
         mysqli_stmt_fetch($stmt);
-        $data = array("office_name" => $office_name, "address" => $address, "post" => $post);
+        $data = array("office_id" => $office_id, "office_name" => $office_name, "address" => $address, "post" => $post);
         return $data;
       }
       else {
@@ -92,16 +91,16 @@
     $data["offices"] = $offices_data;
 
     function model_check($link, $model) {
-      $query = "SELECT name, description, price_hr, image FROM zxc_model WHERE ID=?";
+      $query = "SELECT ID, name, description, price_hr, image FROM zxc_model WHERE ID=?";
       $stmt = mysqli_prepare($link, $query);
       mysqli_stmt_bind_param($stmt, "i", $model);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_store_result($stmt);
 
       if(mysqli_stmt_num_rows($stmt) == 1) {
-        mysqli_stmt_bind_result($stmt, $model_name, $description, $price, $img);
+        mysqli_stmt_bind_result($stmt, $model_id, $model_name, $description, $price, $img);
         mysqli_stmt_fetch($stmt);
-      $data = array("model_name" => $model_name, "description" => $description, "price" => $price, "img" => $img);
+      $data = array("model_id" => $model_id, "model_name" => $model_name, "description" => $description, "price" => $price, "img" => $img);
         return $data;
       }
       else {
@@ -134,16 +133,16 @@
     if ($model_count_data != 1) $data = array_merge($data, $model_count_data); 
 
     function user_data_check($link) {
-      $query = "SELECT first_name, last_name, phone FROM zxc_account WHERE email=?";
+      $query = "SELECT ID, first_name, last_name, phone FROM zxc_account WHERE email=?";
       $stmt = mysqli_prepare($link, $query);
       mysqli_stmt_bind_param($stmt, "s", $_SESSION["email"]);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_store_result($stmt);
 
       if(mysqli_stmt_num_rows($stmt) == 1) {
-        mysqli_stmt_bind_result($stmt, $first_name, $last_name, $phone);
+        mysqli_stmt_bind_result($stmt, $ID, $first_name, $last_name, $phone);
         mysqli_stmt_fetch($stmt);
-        $data = array("first_name" => $first_name, "last_name" => $last_name, "phone" => $phone);
+        $data = array("account_id" => $ID, "first_name" => $first_name, "last_name" => $last_name, "phone" => $phone);
         return $data;
       }
       mysqli_stmt_close($stmt);
@@ -157,6 +156,121 @@
   }
 
   $data = main();
+
+
+
+  // VALIDATION TIME
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+    function validation($data){
+
+      $fields = ["nameFirst", "nameLast", "phone", "quantity", "time", "office", "checkbox", "msg"];
+      $required = ["quantity", "time", "office", "checkbox"];
+
+      if(!isset($_POST["submit"]) || empty($_POST["submit"])) return 1;
+      if($_POST["submit"] != "Order") return 2;
+
+      function isset_check(&$fields){
+        foreach($fields as $field) {
+          if(!isset($_POST[$field])) {
+            return 1;
+          }
+        }
+      }
+
+      if(isset_check($fields)) return 3;
+
+      function empty_check(&$required){
+        foreach($required as $field) {
+          if(empty(trim($_POST[$field]))) {
+            return 1;
+          }
+        }
+      }
+
+      if(empty_check($required)) return 4;
+
+      function html_inj(&$fields) {
+        foreach($fields as $field) {
+          $clear = strip_tags($_POST[$field]);
+          if($clear != $_POST[$field]) {
+            return 1;
+          }
+        }
+      }
+
+      if(html_inj($fields)) return 5;
+
+      $first_name = $_POST["nameFirst"];
+      $last_name = $_POST["nameLast"];
+      $phone = $_POST["phone"];
+      $quantity = $_POST["quantity"];
+      $time = $_POST["time"];
+      $office = $_POST["office"];
+      $msg = $_POST["msg"];
+
+
+      function validate_names($list){
+        foreach($list as $str){
+          if (preg_match('/[0-9\@\:\.\;\|\!\#\}\$\{\=\\&\*\(\)\+\_\%\" "]+/', $str) || (strlen($str) > 20))
+          {
+            return 1;
+          }
+        }
+      }
+
+      if(validate_names([$first_name, $last_name])) return 6;
+
+      function phone_check(&$phone) {
+        if(strlen($phone) > 14) return 1;
+        if(preg_match('/[^0-9\+]/', $phone)) return 1;
+      }
+
+      if(phone_check($phone)) return 7;
+
+      function quantity_check(&$quantity, $count) {
+        if($quantity < 1 || $quantity > $count) return 1;
+      }
+
+      if(quantity_check($quantity, $data["model_count"])) return 8;
+
+      function time_check(&$time) {
+        if($time < 1 || $time > 12) return 1;
+      }
+
+      if(time_check($time)) return 9;
+
+      function office_arr_check(&$office_to_check, &$offices) {
+        foreach($offices as $office) {
+          if($office == $office_to_check) return 1;
+        }
+      }
+
+      if(!office_arr_check($office, $data["offices"])) return 10;
+
+      function msg_check(&$msg) {
+        if(strlen($msg) > 255) return 1;
+      }
+
+      if(msg_check($msg)) return 11;
+
+      require "db_connect.php";
+      $link = mysqli_connect($server, $user, $pass, $db);
+      if (!$link) {
+        die("Connection failed: ".mysqli_connect_error());
+      }
+
+      $query = "INSERT INTO zxc_previous_orders (first_name, last_name, phone, amount, message, office_id, account_ID, model_id, rented_until, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? HOUR), 'completed')";
+      $stmt = mysqli_prepare($link, $query);
+      mysqli_stmt_bind_param($stmt, "ssiisiiis", $first_name, $last_name, $phone, $quantity, $msg, $data["office_id"], $data["account_id"], $data["model_id"], $time);
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_close($stmt);
+      mysqli_close($link);
+      header("Location: account.php");
+      die();
+      return 0;
+    }
+    $result = validation($data);
+  }
 
 ?>
 
@@ -186,7 +300,7 @@
           if(!quantity) quantity_field.value = 1;
 
           if(e.target.parentNode.className == "quantity_button") {
-            if(quantity+1 <= <?php echo $data["model_count"];?>) {
+            if(quantity+1 <= <?php echo $data["model_count"];?>) { // I was forced to put js script directly, because of this
               quantity++;
               quantity_field.value = quantity;
             }
@@ -211,6 +325,45 @@
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
     <div class="main">
+      <?php
+          if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if ($result != 0) echo '<div class="formResult">';
+            if ($result == 1){
+              echo "Submit button name was changed";
+            }
+            elseif ($result  == 2){
+              echo "Value of the submit button was changed";
+            }
+            elseif ($result == 3){
+              echo "Some of the fields were deleted";
+            }
+            elseif ($result == 4){
+              echo "Some of the required fields were empty";
+            }
+            elseif ($result == 5){
+              echo "No html tags allowed";
+            }
+            elseif ($result == 6){
+              echo "Name can contain only - and ' from special characters and at most 20 characters long";
+            }
+            elseif ($result == 7){
+              echo "Only digits and + are allowed for phone";
+            }
+            elseif ($result == 8){
+              echo "Quantity cannot be less than 1 or more than in stock";
+            }
+            elseif ($result == 9){
+              echo "Time cannot be less than 1 or more than 12";
+            }
+            elseif ($result == 10){
+              echo "Office name was altered";
+            }
+            elseif ($result == 11){
+              echo "Message cannot be more than 255 chars long";
+            }
+            if ($result != 0) echo "</div>";
+          }
+        ?>
       <div class="content">
         <div class="model">
             <h1>
@@ -234,13 +387,13 @@
           </div>
         </div>
         <div class="order_form">
-          <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+          <form action="<?php echo (basename($_SERVER['REQUEST_URI'])) ?>" method="post">
             <label for="nameFirst" id="top_label">First name</label>
-            <input type="text" id="NameFirst" name="nameFirst"  maxlength="20" value="<?php echo $data["first_name"];  ?>">
+            <input type="text" id="NameFirst" name="nameFirst" pattern="^[A-Za-zÀ-ÿа-яА-ЯёЁ,.'-]+$" maxlength="20" value="<?php echo $data["first_name"];  ?>">
             <label for="NameLast">Last name</label>
-            <input type="text" id="NameLast" name="nameLast"  maxlength="20" value="<?php echo $data["last_name"];  ?>">
+            <input type="text" id="NameLast" name="nameLast" pattern="^[A-Za-zÀ-ÿа-яА-ЯёЁ,.'-]+$" maxlength="20" value="<?php echo $data["last_name"];  ?>">
             <label for="phone">Phone</label>
-            <input type="tel" pattern="[+0-9]*" id="phone" name="phone" maxlength="15" value="<?php echo $data["phone"];  ?>">
+            <input type="tel" pattern="[+0-9]*" id="phone" name="phone" maxlength="14" value="<?php echo $data["phone"];  ?>">
             <div class="quantityTime">
               <div class="quantity_container">
                 <label for="quantity">Quantity</label>
@@ -261,7 +414,7 @@
               </div>
             </div>
               <label for="office">Choose location</label>
-              <select id="office" name="offfice" required>
+              <select id="office" name="office" required>
                 <?php
                   for($i=1;$i<count($data["offices"]);$i++) { ?>
                     <option value="<?php echo $data["offices"][$i];?>" <?php if($_GET["office"] == $i) echo "selected";?>><?php echo ($data["offices"][$i]);?></option>
@@ -270,10 +423,10 @@
                 ?>
               </select>
             <div class="terms">
-              <input type="checkbox" id="checkbox" required>
+              <input type="checkbox" id="checkbox" name="checkbox" required>
               <label for="checkbox">I agree to the <a href="./policy.php">Terms and Conditions</a></label>
             </div>
-            <label for="msg">Message</label>
+            <label for="msg">Message (max 255 chars)</label>
             <textarea name="msg" rows="3" maxlength="255"></textarea>
             <input type="submit" value="Order" id="submit" name="submit">
           </form>
