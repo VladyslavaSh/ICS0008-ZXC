@@ -80,7 +80,6 @@
       mysqli_stmt_execute($stmt);
       mysqli_stmt_bind_result($stmt, $office_name);
       $data = [];
-      array_push($data, "dummy");
       while(mysqli_stmt_fetch($stmt)) {
         array_push($data, $office_name);
       }
@@ -240,12 +239,18 @@
       if(time_check($time)) return 9;
 
       function office_arr_check(&$office_to_check, &$offices) {
-        foreach($offices as $office) {
-          if($office == $office_to_check) return 1;
+        $data = [];
+        for($i=0;$i<count($offices);$i++) {
+          if($offices[$i] == $office_to_check) {
+            array_push($data, $i+1);
+            return $data;
+          }
         }
+        return 1;
       }
 
-      if(!office_arr_check($office, $data["offices"])) return 10;
+      $office_id = office_arr_check($office, $data["offices"]);
+      if ($office_id == 1) return 10;
 
       function msg_check(&$msg) {
         if(strlen($msg) > 255) return 1;
@@ -259,14 +264,18 @@
         die("Connection failed: ".mysqli_connect_error());
       }
 
+
       $query = "INSERT INTO zxc_previous_orders (first_name, last_name, phone, amount, message, office_id, account_ID, model_id, rented_until, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? HOUR), 'completed')";
       $stmt = mysqli_prepare($link, $query);
-      mysqli_stmt_bind_param($stmt, "ssiisiiis", $first_name, $last_name, $phone, $quantity, $msg, $data["office_id"], $data["account_id"], $data["model_id"], $time);
+      mysqli_stmt_bind_param($stmt, "ssiisiiis", $first_name, $last_name, $phone, $quantity, $msg, $office_id[0], $data["account_id"], $data["model_id"], $time);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_close($stmt);
       mysqli_close($link);
       header("Location: account.php");
       die();
+      return 0;
+
+      echo $office_id;
       return 0;
     }
     $result = validation($data);
@@ -416,7 +425,7 @@
               <label for="office">Choose location</label>
               <select id="office" name="office" required>
                 <?php
-                  for($i=1;$i<count($data["offices"]);$i++) { ?>
+                  for($i=0;$i<count($data["offices"]);$i++) { ?>
                     <option value="<?php echo $data["offices"][$i];?>" <?php if($_GET["office"] == $i) echo "selected";?>><?php echo ($data["offices"][$i]);?></option>
                   <?php
                   }
