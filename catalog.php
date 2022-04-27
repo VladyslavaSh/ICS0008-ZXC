@@ -1,5 +1,31 @@
-<?php 
+<?php
   session_start();
+  require_once("./php/lib/dbconnector.php");
+
+  $dbc = new DBConnection();
+
+  function load_offices(&$dbcon) {
+    $cursor = $dbcon->execute("SELECT ID,name,address,post FROM zxc_offices");
+    while ($row = $dbcon->fetch_one($cursor)) {
+      if (!empty($_GET["office"]) && ($_GET["office"] == $row[0])) {
+        echo '<div class="inputLable"><input type="radio" form="filterForm" class="officeButton" id="office'.$row[0].'" name="office" value="'.$row[0].'" checked hidden>';
+      } else {
+        echo '<div class="inputLable"><input type="radio" form="filterForm" class="officeButton" id="office'.$row[0].'" name="office" value="'.$row[0].'" hidden>';
+      }
+      echo '<label for="office'.$row[0].'" class="inputLable">'.$row[1].'<br><span class="inputLableST">'.$row[2].', '.$row[3].' Tallinn</span></label></div>';
+    }
+    $dbcon->close_cursor($cursor);
+  }
+
+  $cursor = $dbc->execute("SELECT MIN(price_hr), MAX(price_hr) FROM zxc_model");
+  $row = $dbc->fetch_one($cursor);
+  $min = floor($row[0]);
+  $max = ceil($row[1]);
+  $dbc->close_cursor($cursor);
+  unset($row);
+  unset($cursor);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -9,78 +35,84 @@
     <link rel="stylesheet" href="./css/catalog.css">
     <title>Catalog - ZXC</title>
     <script src="./js/multiRangeSlider.js" type="text/javascript" defer></script>
+    <script src="./js/catalogLoader.js" type="text/javascript" defer></script>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
     <div class="main">
+      <input type="checkbox" id="checkFilter" hidden>
       <div id="filterBar">
-        <h2>Filters</h2>
-        <form id="filterForm" class="" action="catalog.php" method="get">
-          <div id="officeSelection">
-            <label for="office1">{Office 1}</label>
-            <input type="radio" id="office1" form="filterForm" name="office" value="1">
-            <label for="office2">{Office 2}</label>
-            <input type="radio" id="office2" form="filterForm" name="office" value="2">
-            <label for="office3">{Office 3}</label>
-            <input type="radio" id="office3" form="filterForm" name="office" value="3">
-            <label for="office4">{Office 4}</label>
-            <input type="radio" id="office4" form="filterForm" name="office" value="4">
-            <label for="office5">{Office 5}</label>
-            <input type="radio" id="office5" form="filterForm" name="office" value="5">
-          </div>
-          <p>Type</p>
-          <select class="" name="o">
-            <option value="all" selected>all</option>
-            <option value="bikes">bikes</option>
-            <option value="scooters">scooters</option>
-          </select>
-          <p>Price range</p>
-          <div id="priceSlider" class="multiRangeSlider">
-            <input type="range" class="inputLeft" min="0" max="100" value="0">
-            <input type="range" class="inputRight" min="0" max="100" value="100">
-            <div class="slider">
-              <div class="track"></div>
-              <div class="range"></div>
-              <div class="thumbLeft"></div>
-              <div class="thumbRight"></div>
+        <input type="checkbox" id="checkFilter" hidden>
+        <label for="checkFilter" id="hideFilters"></label>
+        <div id="filterBarMain">
+          <h2>Filters</h2>
+          <form id="filterForm" action="catalog.php" method="get">
+            <p>Take-out office</p>
+            <div id="officeSelection">
+              <?php
+                load_offices($dbc);
+              ?>
             </div>
-            <div class="sliderLabel">
-              <span class="sliderSpan">
-                <span class="inputSpan"><input type="number" name="priceMin" value="">€</span> -
-                <span class="inputSpan"><input type="number" name="priceMax" value="">€</span>
-              </span>
+            <p>Type</p>
+            <div>
+              <div class="inputLable">
+                <input type="radio" class="typeButton" id="typeAll" name="type" value="all" hidden <?php if (!empty($_GET["type"])) {if ($_GET["type"] == "all") {echo "checked";}} ?>>
+                <label for="typeAll">All</label>
+              </div>
+              <div class="inputLable">
+                <input type="radio" class="typeButton" id="typeBike" name="type" value="bike" hidden <?php if (!empty($_GET["type"])) {if ($_GET["type"] == "bike") {echo "checked";}} ?>>
+                <label for="typeBike">Bikes</label>
+              </div>
+              <div class="inputLable">
+                <input type="radio" class="typeButton" id="typeScooter" name="type" value="scooter" hidden <?php if (!empty($_GET["type"])) {if ($_GET["type"] == "scooter") {echo "checked";}} ?>>
+                <label for="typeScooter">Scooters</label>
+              </div>
             </div>
-          </div>
-          <input type="button" name="reset" value="reset">
-          <input type="submit" value="Apply filters">
-        </form>
-        <input type="button" name="subtract" value="<">
+            <p>Price range</p>
+            <div id="priceSlider" class="multiRangeSlider">
+              <input type="range" class="inputLeft" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMin"])) {echo $min;} else {echo $_GET["priceMin"];} ?>">
+              <input type="range" class="inputRight" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMax"])) {echo $max;} else {echo $_GET["priceMax"];} ?>">
+              <div class="slider">
+                <div class="track"></div>
+                <div class="range"></div>
+                <div class="thumbLeft"></div>
+                <div class="thumbRight"></div>
+              </div>
+              <div class="sliderLabel">
+                <span class="sliderSpan">
+                  <span class="inputSpan"><input type="number" class="priceMin" name="priceMin" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMin"])) {echo $min;} else {echo $_GET["priceMin"];} ?>">€</span> -
+                  <span class="inputSpan"><input type="number" class="priceMax" name="priceMax" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMax"])) {echo $max;} else {echo $_GET["priceMax"];} ?>">€</span>
+                </span>
+              </div>
+            </div>
+            <div>
+              <input type="button" id="resetButton" value="Reset">
+              <input type="submit" id="submitButton" value="Apply filters">
+            </div>
+          </form>
+        </div>
       </div>
       <div id="content">
-        <div id="searchbar">
-          <input type="search" form="filterForm" name="b" value="" placeholder="Your search request goes here" size="50">
-          <select class="" form="filterForm" name="o">
-            <option value="all" selected>popularity</option>
-            <option value="bikes">price (from lowest)</option>
-            <option value="scooters">price (from highest)</option>
-          </select>
-          <input type="button" name="searchbutton" value="Search">
+        <div id="searchBar">
+          <div id="searchBarInput">
+            <input type="search" form="filterForm" id="searchBarS" name="search" placeholder="search" value="<?php if(!empty($_GET["search"])) echo $_GET["search"]; ?>">
+            <label for="searchBarBy">sort by:</label>
+            <select form="filterForm" id="searchBarBy" name="filterBy">
+              <option value="popularity" <?php if (empty($_GET["filterBy"]) || ($_GET["filterBy"] == "popularity")) echo "selected"; ?>>popularity</option>
+              <option value="pricea" <?php if(!empty($_GET["filterBy"])) {if($_GET["filterBy"] == "pricea") {echo "selected";}} ?>>price (from lowest)</option>
+              <option value="priced" <?php if(!empty($_GET["filterBy"])) {if($_GET["filterBy"] == "priced") {echo "selected";}} ?>>price (from highest)</option>
+            </select>
+          </div>
+          <input type="button" id="searchBarSB" value=">">
         </div>
         <div id="searchresults">
-          <table>
-            <tr>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-            </tr>
-            <tr>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-              <td><?php include "./php/tpl/search_result.php"?></td>
-            </tr>
-            <!-- There is a huge mess, so this table will be managed by js script, which will download the results as we go deeper -->
-          </table>
         </div>
       </div>
     </div>
     <?php include "./php/tpl/footer.php"; ?>
   </body>
 </html>
+
+<?php
+  unset($dbc);
+?>

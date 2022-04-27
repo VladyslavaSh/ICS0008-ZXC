@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
 
   require_once "db_connect.php";
@@ -32,7 +32,7 @@
     <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/carousel.js" type="text/javascript"></script>
-    <title>Home</title>
+    <title>Home - ZXC</title>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>

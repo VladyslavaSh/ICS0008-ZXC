@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
 ?>
 
@@ -48,14 +48,14 @@
     $model = $_GET["model"];
     $office_ID = $_GET["office"];
     $data = [];
-    
+
     function office_check($link, $office_ID) {
       $query = "SELECT ID, name, address, post FROM zxc_offices WHERE ID=?";
       $stmt = mysqli_prepare($link, $query);
       mysqli_stmt_bind_param($stmt, "i", $office_ID);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_store_result($stmt);
-  
+
       if(mysqli_stmt_num_rows($stmt) == 1) {
         mysqli_stmt_bind_result($stmt, $office_id, $office_name, $address, $post);
         mysqli_stmt_fetch($stmt);
@@ -305,6 +305,7 @@
   <head>
     <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/rent.css">
+    <title>Rent - ZXC</title>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         let amount;

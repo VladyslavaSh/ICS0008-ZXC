@@ -7,7 +7,7 @@
   <head>
     <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/404.css">
-    <title>Home</title>
+    <title>404 - ZXC</title>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
 ?>
 
@@ -7,7 +7,7 @@
   <head>
     <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/policy.css">
-    <title>Terms</title>
+    <title>Policy - ZXC</title>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
@@ -114,7 +114,7 @@
         <h3>Contact</h3>
         <p><b>Telephone:</b> <a href="tel:+37255939118">+37255939118</a></p>
         <p><b>E-mail:</b> <a href="mailto: vlshek@taltech.ee">vlshek@taltech.ee</a></p>
-        <p><b>Website:</b> https://enos.itcollege.ee</p>
+        <p><b>Website:</b> <a href="./support.php"></a>https://enos.itcollege.ee/~getara/ics0008-zxc/support.php</p>
       </div>
     </div>
     <?php include "./php/tpl/footer.php"; ?>
