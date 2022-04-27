@@ -18,6 +18,9 @@
       $result = "{lat:$lat, lng:$lng},";
       array_push($offices, $result);
     }
+    $last = substr(end($offices), 0, -1);
+    array_pop($offices);
+    array_push($offices, $last);
   }
   mysqli_stmt_close($stmt);
   mysqli_close($link);
@@ -36,23 +39,26 @@
     <div class="main">
       <div class="carousel">
         <div class="slide slide_1">
+          <img class="fluid" src="./img/index/carousel/products/slide1.jpg" alt="promote_1">
           <div class="text">
-            <h1>Placeholder h1 text slide 1</h1>
-            <p>Placeholder p text slide 1</p>
+            <h1>Jack and Jill</h1>
+            <p>They are in love with our products</p>
           </div>
         </div>
 
         <div class="slide slide_2">
+        <img class="fluid" src="./img/index/carousel/products/slide2.jpg" alt="promote_2">
           <div class="text">
-            <h1>Placeholder h1 text slide 2</h1>
-            <p>Placeholder p text slide 2</p>
+            <h1>Mary</h1>
+            <p>Enjoying the total comfort of our bicycles</p>
           </div>
         </div>
 
         <div class="slide slide_3">
+        <img class="fluid" src="./img/index/carousel/products/slide3.jpg" alt="promote_3">
           <div class="text">
-            <h1>Placeholder h1 text slide 3</h1>
-            <p>Placeholder p text slide 3</p>
+            <h1>Michael</h1>
+            <p>Discovers the world with our scooter</p>
           </div>
         </div>
 
@@ -72,9 +78,29 @@
       </div>
 
       <div id="map"></div>
-      <script src="./js/map.js" type="text/javascript">
+      <script>
+        function initMap(){
+          let map_options = {
+              zoom:13,
+              center:{lat:59.416687, lng:24.741994}
+          }
+          let map = new google.maps.Map(document.getElementById("map"), map_options);
+
+          let markers =  [<?php for($i=0;$i<count($offices);$i++) echo $offices[$i];?>];
+
+          function createMarker(markers) {
+              for(let i = 0; i < markers.length; i++) {
+                  let marker = new google.maps.Marker({
+                      position:markers[i],
+                      map:map,
+                      icon:"./img/index/map_icon.png",
+                  });
+              }
+          }
+          createMarker(markers);
+      }
       </script>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOfpvJuLB7hrJM06k0xW6oXez6bwChQhE&callback=initMap"></script>
+      <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOfpvJuLB7hrJM06k0xW6oXez6bwChQhE&callback=initMap"></script>
 
     </div>
     <?php include "./php/tpl/footer.php"; ?>

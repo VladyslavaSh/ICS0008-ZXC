@@ -1,0 +1,557 @@
+/* ############################################################################################################ */
+/* ######################################### GLOBALS ########################################################## */
+/* ############################################################################################################ */
+
+.content, .formResult {
+    text-align: center;
+    background-color: rgba(49, 85, 112);
+    display:flex;
+    padding:40px;
+    max-width:85%;
+    margin: 0px auto 0px auto;
+}
+
+.formResult {
+    display:block;
+    padding: 40px 40px 0px 40px;
+    font-size: 35px;
+    color:red;
+}
+
+.content h1, p {
+    margin:0;
+    padding:0;
+}
+
+/* ############################################################################################################ */
+/* ######################################### INFO ############################################################# */
+/* ############################################################################################################ */
+
+.model {
+    width:50%;
+}
+
+.info {
+    margin: 5% auto 0px auto;
+}
+
+.info > div:not(.desc) {
+    margin-top: 5%;
+}
+
+.add_info {
+    display:flex;
+    flex-direction: column;
+}
+
+.model h1 {
+    font-size:40px;
+}
+
+.info p {
+    font-size:25px;
+}
+
+/* ############################################################################################################ */
+/* ######################################### MODEL IMAGE ###################################################### */
+/* ############################################################################################################ */
+
+.model_image {
+    width: 50%;
+    height:400px;
+    margin: 5% auto 0px auto;
+}
+
+.model_image img {
+    width:100%;
+    height:100%;
+}
+
+/* ############################################################################################################ */
+/* ######################################### FORM ############################################################# */
+/* ############################################################################################################ */
+
+.order_form {
+    width:40%;
+    margin: 0 auto 0 auto;
+}
+
+form {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:0;
+}
+
+label {
+    text-transform: uppercase;
+    color: #ecf6fc;
+    font-size: 35px;
+    margin-top:15px;
+}
+
+#top_label {
+    margin:0;
+}
+  
+input, textarea {
+    font-size:35px;
+    margin: 15px 0;
+    padding:10px 0;
+    background-color: rgba(37, 65, 87, 0.4);
+}
+
+.quantityTime {
+    display:flex;
+    align-items: center;
+}
+
+.quantity_container {
+    width:50%;
+    align-self:flex-end;
+}
+
+.quantity_button {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity {
+    -moz-appearance: textfield; /* to hide arrows in input type number in firefox browser */
+    text-align: center;
+    background-color: white;
+    border:0;
+}
+
+/* to hide arrows in input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.minus, .plus {
+    font-size:35px;
+    border:0;
+    padding: 10px;
+    background-color: white;
+}
+
+.minus {
+    border-radius: 30px 0px 0px 30px;
+}
+
+.plus {
+    border-radius: 0px 30px 30px 0px;
+}
+
+.time_container {
+    width:50%;
+}
+
+.time_container p {
+    text-transform: uppercase;
+    color: #ecf6fc;
+    font-size: 25px;
+}
+
+.time_button {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.terms {
+    padding: 10px;
+    margin:15px 0;
+    border: 2px solid black;
+    background-color: gray;
+}
+
+.terms a{
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    color: rgb(255, 255, 255)
+}
+
+.terms a:hover {
+    color:red;
+}
+
+#checkbox {
+    margin:0;
+    padding:0;
+    height:1em;
+    width:1em;
+    vertical-align: bottom;
+}
+
+select {
+    font-size:35px;
+    margin: 15px 0;
+    padding:10px 0;
+    background-color: rgba(37, 65, 87, 0.4);
+}
+
+textarea {
+    font-size:25px;
+    resize:none;
+}
+
+#submit {
+    margin: 30px 0px 0px 0px;
+    border: 0;
+    font-size:30px;
+    text-transform: uppercase;
+    background-color: #23b890;
+    color:white;
+    border-radius: 30px;
+}
+
+/* ############################################################################################################ */
+/* ######################################### MEDIA ############################################################ */
+/* ############################################################################################################ */
+
+@media (max-width:1920px) {
+    .info p {
+        font-size:22px;
+    }
+    label, .formResult {
+        font-size:25px;
+    }
+    input {
+        font-size: 25px;
+    }
+    textarea {
+        font-size:20px;
+    }
+    .minus, .plus {
+        font-size:25px;
+    }
+    .time_container p {
+        font-size:20px;
+    }
+    select {
+        font-size:25px;
+    }
+    #submit {
+        font-size:25px;
+    }
+}
+
+@media (max-width:1800px) {
+    .model_image {
+        width: 60%;
+    }
+}
+
+@media (max-width:1600px) {
+    .model_image {
+        width: 70%;
+    }
+}
+
+@media (max-width:1400px) {
+    .content {
+        margin: 0;
+        max-width: 100%;
+        flex-direction: column;
+    }
+    .formResult {
+        margin: 0;
+        max-width:100%;
+    }
+    .model {
+        width:100%;
+        margin: 0px auto;
+    }
+    .model_image {
+        width: 40%;
+    }
+    .add_info {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .order_form {
+        margin-top: 5%;
+        width:50%;
+    }
+}
+
+@media (max-width:1200px) {
+    .model_image {
+        width: 50%;
+    }
+}
+
+@media (max-width:1000px) {
+    .info p {
+        font-size:19px;
+    }
+    label, .formResult {
+        font-size:22px;
+    }
+    input {
+        font-size: 22px;
+    }
+    textarea {
+        font-size:18px;
+    }
+    .minus, .plus {
+        font-size:22px;
+    }
+    .time_container p {
+        font-size:17px;
+    }
+    select {
+        font-size:22px;
+    }
+    #submit {
+        font-size:22px;
+    }
+    .model_image {
+        width: 60%;
+    }
+}
+
+@media (max-width:800px) {
+    .model h1 {
+        font-size:35px;
+    }
+    .model_image,  .order_form {
+        width: 70%;
+    }
+}
+
+@media (max-width:600px) {
+    .info p {
+        font-size:17px;
+    }
+    label, .formResult {
+        font-size:20px;
+    }
+    input {
+        font-size: 20px;
+    }
+    textarea {
+        font-size:16px;
+    }
+    .minus, .plus {
+        font-size:20px;
+    }
+    .time_container p {
+        font-size:15px;
+    }
+    select {
+        font-size:20px;
+    }
+    #submit {
+        font-size:20px;
+    }
+    .model h1 {
+        font-size:30px;
+    }
+    .model_image, .order_form {
+        width:80%;
+    }
+    .model_image {
+        height:300px;
+    }
+}
+
+@media (max-width:500px) {
+    .info p {
+        font-size:15px;
+    }
+    label, .formResult {
+        font-size:18px;
+    }
+    input {
+        font-size: 18px;
+    }
+    textarea {
+        font-size:15px;
+    }
+    .minus, .plus {
+        font-size:18px;
+    }
+    .time_container p {
+        font-size:13px;
+    }
+    select {
+        font-size:18px;
+    }
+    #submit {
+        font-size:18px;
+    }
+    .model h1 {
+        font-size:25px;
+    }
+    .model_image, .order_form {
+        width:90%;
+    }
+
+}
+
+@media (max-width:450px) {
+    .model_image, .order_form {
+        width:100%;
+    }
+}
+
+@media (max-width:400px) {
+    .info p {
+        font-size:13px;
+    }
+    label, .formResult {
+        font-size:16px;
+    }
+    input {
+        font-size: 16px;
+    }
+    .minus, .plus {
+        font-size:16px;
+    }
+    .time_container p {
+        font-size:11px;
+    }
+    select {
+        font-size:16px;
+    }
+    #submit {
+        font-size:16px;
+    }
+    .model h1 {
+        font-size:20px;
+    }
+    .model_image {
+        height:250px;
+    }
+}
+
+@media (max-width:350px) {
+    .content {
+        padding:40px 10px 40px 10px;
+    }
+    .info p {
+        font-size:11px;
+    }
+    label, .formResult {
+        font-size:14px;
+    }
+    input, textarea {
+        font-size: 14px;
+    }
+    .minus, .plus {
+        font-size:14px;
+    }
+    .time_container p {
+        font-size:9px;
+    }
+    select {
+        font-size:14px;
+    }
+    #submit {
+        font-size:14px;
+    }
+    .model h1 {
+        font-size:18px;
+    }
+}
+
+@media (max-width:300px) {
+    .info p {
+        font-size:9px;
+    }
+    label, .formResult {
+        font-size:12px;
+    }
+    input, textarea {
+        font-size: 12px;
+    }
+    .minus, .plus {
+        font-size:12px;
+    }
+    .time_container p {
+        font-size:7px;
+    }
+    select {
+        font-size:12px;
+    }
+    #submit {
+        font-size:12px;
+    }
+    .model h1 {
+        font-size:16px;
+    }
+    .quantityTime {
+        flex-direction: column;
+    }
+    .quantityTime > div {
+        width:100%;
+    }
+    .model_image {
+        height:225px;
+    }
+}
+
+@media (max-width:250px) {
+    .info p {
+        font-size:9px;
+    }
+    label, .formResult {
+        font-size:12px;
+    }
+    input, textarea {
+        font-size: 12px;
+    }
+    .minus, .plus {
+        font-size:12px;
+    }
+    .time_container p {
+        font-size:7px;
+    }
+    select {
+        font-size:12px;
+    }
+    #submit {
+        font-size:12px;
+    }
+    .model h1 {
+        font-size:16px;
+    }
+    .model_image {
+        height:180px;
+    }
+}
+
+@media (max-width:200px) {
+    .info p {
+        font-size:9px;
+    }
+    label, .formResult {
+        font-size:12px;
+    }
+    input, textarea {
+        font-size: 12px;
+    }
+    .minus, .plus {
+        font-size:12px;
+    }
+    .time_container p {
+        font-size:7px;
+    }
+    select {
+        font-size:12px;
+    }
+    #submit {
+        font-size:12px;
+    }
+    .model h1 {
+        font-size:16px;
+    }
+    .model_image {
+        height:125px;
+    }
+}
