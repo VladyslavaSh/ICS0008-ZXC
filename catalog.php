@@ -98,12 +98,6 @@
           <input type="button" id="searchBarSB" value=">">
         </div>
         <div id="searchresults">
-          <?php include "./php/tpl/search_result.php"?>
-          <?php include "./php/tpl/search_result.php"?>
-          <?php include "./php/tpl/search_result.php"?>
-          <?php include "./php/tpl/search_result.php"?>
-          <?php include "./php/tpl/search_end.php"?>
-            <!-- There is a huge mess, so this table will be managed by js script, which will download the results as we go deeper -->
         </div>
       </div>
     </div>

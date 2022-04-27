@@ -3,8 +3,7 @@
     <h2>{MODEL_NAME}</h2>
   </div>
   <div class="searchResultImage">
-    <img src="./model_image.php?model={MODEL}" alt="Model {MODEL_NAME}">
-    <!--- <img src="./php/model_image.php?model={MODEL}" alt="Model {MODEL_NAME}"> --->
+    <img src="./php/model_image.php?model={MODEL}" alt="Model {MODEL_NAME}">
   </div>
   <div class="searchResultText">
     <p class="searchResultType">Type: {TYPE}</p>
@@ -17,7 +16,6 @@
         {OFFICE}
       </form>
       {AVAILABILITY}
-      <p class="smallPortion">There is {PRODUCT_NUM} left!</p>
     </div>
   </div>
 </div>

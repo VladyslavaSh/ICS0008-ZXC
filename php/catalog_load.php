@@ -95,7 +95,7 @@
       }
 
       $count_cursor = $dbc->execute($inner_query, $inner_query_args);
-      echo $template->render($row[0],$row[1],$row[2],$row[3],$row[4],$dbc->fetch_one($count_cursor),$office);
+      echo $template->render($row[0],$row[1],$row[2],$row[3],$row[4],$dbc->fetch_one($count_cursor)[0],$office);
       $dbc->close_cursor($count_cursor);
     }
     if ($cursor->num_rows < FIELD_BUFFER) {

@@ -539,4 +539,5 @@
 
 .searchResultImage img {
   height: min(90vw, 300px);
+  width: 300px;
 }
