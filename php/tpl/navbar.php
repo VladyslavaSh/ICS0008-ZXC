@@ -14,7 +14,7 @@
             <li><a href="./about.php">About</a></li>
             <li><a href="./catalog.php">Order</a></li>
             <li><a href="./policy.php">Policy</a></li>
-            <li><a href="./suport.php">Support</a></li>
+            <li><a href="./support.php">Support</a></li>
             <?php
             if(isset($_SESSION["email"])) {
                 echo '<li><a id="avatar_link" href="./account.php"><img id="avatar" src="./img/user_icon.png"></a></li>';

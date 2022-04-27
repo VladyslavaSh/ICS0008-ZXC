@@ -277,13 +277,13 @@
       mysqli_stmt_close($stmt);
 
       // updating a vehicle of the first available zxc_vehicle table
-      $query = "UPDATE zxc_vehicle SET status = 'rented', rented_by=?, rented_when=NOW(), rented_until=date_add(NOW(), INTERVAL ? hour) WHERE model_id=? AND status = 'available' LIMIT ?";
+      $query = "UPDATE zxc_vehicle SET status = 'rented', rented_by=?, rented_when=NOW(), rented_until=date_add(NOW(), INTERVAL ? hour) WHERE model_id=? AND office_id=? AND status = 'available' LIMIT ?";
       $stmt = mysqli_prepare($link, $query);
-      mysqli_stmt_bind_param($stmt, "sssi", $data["account_id"], $time, $data["model_id"], $quantity);
+      mysqli_stmt_bind_param($stmt, "sssii", $data["account_id"], $time, $data["model_id"], $office_id, $quantity);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_close($stmt);
 
-      // incrementing toral_rented in zxc_model table
+      // incrementing total_rented in zxc_model table
       $query = "UPDATE zxc_model SET total_rented=total_rented + ? WHERE id=?";
       $stmt = mysqli_prepare($link, $query);
       mysqli_stmt_bind_param($stmt, "ii", $quantity, $data["model_id"]);
@@ -308,7 +308,14 @@
     <title>Rent - ZXC</title>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        let amount;
+        let amount = <?php if(isset($data["model_count"][$data["office_id"]])) 
+        {
+          echo ($data["model_count"][$data["office_id"]]);
+        }
+        else {
+          echo 0;
+        }
+          ?>;
         function change() {
           <?php
             $JSON = json_encode($data["offices"]);
@@ -322,14 +329,15 @@
 
           for (let i=0;i<officeNames.length;i++) {
             if(officeNames[i] === this.value) {
+              quantity.value = 1;
               if(officeIDs[i+1]) {
                 amount = officeIDs[i+1];
                 stock.style.color = "black";
                 stock.innerHTML = "In stock: "+amount;
                 quantity.setAttribute("max", amount);
-                quantity.value = 1;
               }
               else{
+                amount = 0;
                 stock.style.color = "red";
                 stock.innerHTML = "Out of stock";
                 quantity.setAttribute("max", 0);
