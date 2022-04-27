@@ -17,7 +17,8 @@
     $dbcon->close_cursor($cursor);
   }
 
-  $max = 10;
+  $min = floor(2.49);
+  $max = ceil(49.59);
 ?>
 
 <!DOCTYPE html>
@@ -62,8 +63,8 @@
             </div>
             <p>Price range</p>
             <div id="priceSlider" class="multiRangeSlider">
-              <input type="range" class="inputLeft" min="0" max="<?php echo $max; ?>" value="0">
-              <input type="range" class="inputRight" min="0" max="<?php echo $max; ?>" value="<?php echo $max; ?>">
+              <input type="range" class="inputLeft" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMin"])) {echo $min;} else {echo $_GET["priceMin"];} ?>">
+              <input type="range" class="inputRight" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMax"])) {echo $max;} else {echo $_GET["priceMax"];} ?>">
               <div class="slider">
                 <div class="track"></div>
                 <div class="range"></div>
@@ -72,8 +73,8 @@
               </div>
               <div class="sliderLabel">
                 <span class="sliderSpan">
-                  <span class="inputSpan"><input type="number" class="priceMin" name="priceMin" min="0" max="<?php echo $max; ?>" value="0">€</span> -
-                  <span class="inputSpan"><input type="number" class="priceMax" name="priceMax" min="0" max="<?php echo $max; ?>" value="<?php echo $max; ?>">€</span>
+                  <span class="inputSpan"><input type="number" class="priceMin" name="priceMin" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMin"])) {echo $min;} else {echo $_GET["priceMin"];} ?>">€</span> -
+                  <span class="inputSpan"><input type="number" class="priceMax" name="priceMax" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php if (empty($_GET["priceMax"])) {echo $max;} else {echo $_GET["priceMax"];} ?>">€</span>
                 </span>
               </div>
             </div>

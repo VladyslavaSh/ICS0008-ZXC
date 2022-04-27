@@ -451,8 +451,13 @@
 
 @media (min-width: 1020px) {
   .searchResult {
+    position: relative;
     width: 60vw;
     height: 300px;
+  }
+
+  .searchResult h2 {
+    width: calc(100% - 300px);
   }
 
   .searchResultImage {
@@ -461,16 +466,19 @@
     margin-top: -1.7em;
   }
 
-  .searchResultDesc {
-    height: 120px;
-  }
-
   .searchResultButton input{
     margin-right: 15px;
   }
 
   .searchResultButton form {
+    position:absolute;
     display: inline;
+    bottom: 20px;
+  }
+
+  .searchResult  h3 {
+    position: absolute;
+    bottom: 45px;
   }
 
   .searchResultButton p{

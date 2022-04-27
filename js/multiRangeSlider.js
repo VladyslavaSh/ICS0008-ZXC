@@ -68,6 +68,22 @@ function setRightPrice(event) {
   }
 }
 
+function updateSlider(slider) {
+  let thumbLeft = slider.getElementsByClassName("thumbLeft")[0],
+  thumbRight = slider.getElementsByClassName("thumbRight")[0],
+  inputLeft = slider.getElementsByClassName("inputLeft")[0],
+  inputRight = slider.getElementsByClassName("inputRight")[0],
+  rangeElem = slider.getElementsByClassName("range")[0];
+  let min = parseInt(inputLeft.min), max = parseInt(inputRight.max), value1 = parseInt(inputLeft.value), value2 = parseInt(inputRight.value);
+  let percent1 = ((value1 - min) / (max - min)) * 100,
+  percent2 = ((value2 - min) / (max - min)) * 100;
+
+  thumbLeft.style.left = percent1 + "%";
+  rangeElem.style.left = percent1 + "%";
+  thumbRight.style.right = (100 - percent2) + "%";
+  rangeElem.style.right = (100 - percent2) + "%";
+}
+
 let multiRangeSliders = document.getElementsByClassName("multiRangeSlider");
 
 for (slider of multiRangeSliders) {
@@ -106,4 +122,5 @@ for (slider of multiRangeSliders) {
   inputRight.addEventListener("mouseup", function(event) {
     event.currentTarget.parentElement.getElementsByClassName("thumbRight")[0].classList.remove("thumbActive");
   });
+  updateSlider(slider);
 }
