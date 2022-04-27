@@ -27,7 +27,7 @@ class SearchTemplate {
 
     if ($model_available == 0) {
       $working_tpl = str_replace("{IS_DISABLED}", 'disabled="disabled"', $working_tpl);
-      $working_tpl = str_replace("{AVAILABILITY}", '<p class="empty">There is 0 left!</p>', $working_tpl);
+      $working_tpl = str_replace("{AVAILABILITY}", '<p class="empty">Out of stock!</p>', $working_tpl);
     } else {
       $working_tpl = str_replace("{IS_DISABLED}", "", $working_tpl);
       if ($model_available > PRODUCT_ALERT_MIN) {
