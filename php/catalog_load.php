@@ -90,7 +90,7 @@
       $inner_query = "SELECT COUNT(zxc_vehicle.ID) FROM zxc_vehicle WHERE zxc_vehicle.model_id = ? AND zxc_vehicle.status = 'available'";
       $inner_query_args[] = $row[0]; //ID
       if ($office != 0) {
-        $inner_query_where .= " AND zxc_vehicle.office_id = ?";
+        $inner_query .= " AND zxc_vehicle.office_id = ?";
         $inner_query_args[] = $office;
       }
 

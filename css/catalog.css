@@ -51,7 +51,7 @@
 }
 
 #searchBarSB:active {
-  background-color: #42e6b1;
+  background-color: #23b890;
   box-shadow: 0 0 0 3px rgba(66,230,177,0.4);
 }
 
@@ -489,8 +489,9 @@
 
   .searchResultButton p{
     display: inline;
-    position:relative;
-    top: -3px;
+    position: absolute;
+    bottom: 15px;
+    left: 190px;
   }
 
   .searchResultEnd {
