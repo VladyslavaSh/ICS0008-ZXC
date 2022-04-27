@@ -8,17 +8,24 @@
     $cursor = $dbcon->execute("SELECT ID,name,address,post FROM zxc_offices");
     while ($row = $dbcon->fetch_one($cursor)) {
       if (!empty($_GET["office"]) && ($_GET["office"] == $row[0])) {
-        echo '<div class="inputLable"><input type="radio" form="filterForm" id="office'.$row[0].'" name="office" value="'.$row[0].'" checked hidden>';
+        echo '<div class="inputLable"><input type="radio" form="filterForm" class="officeButton" id="office'.$row[0].'" name="office" value="'.$row[0].'" checked hidden>';
       } else {
-        echo '<div class="inputLable"><input type="radio" form="filterForm" id="office'.$row[0].'" name="office" value="'.$row[0].'" hidden>';
+        echo '<div class="inputLable"><input type="radio" form="filterForm" class="officeButton" id="office'.$row[0].'" name="office" value="'.$row[0].'" hidden>';
       }
       echo '<label for="office'.$row[0].'" class="inputLable">'.$row[1].'<br><span class="inputLableST">'.$row[2].', '.$row[3].' Tallinn</span></label></div>';
     }
     $dbcon->close_cursor($cursor);
   }
 
-  $min = floor(2.49);
-  $max = ceil(49.59);
+  $cursor = $dbc->execute("SELECT MIN(price_hr), MAX(price_hr) FROM zxc_model");
+  $row = $dbc->fetch_one($cursor);
+  $min = floor($row[0]);
+  $max = ceil($row[1]);
+  $dbc->close_cursor($cursor);
+  unset($row);
+  unset($cursor);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,15 +56,15 @@
             <p>Type</p>
             <div>
               <div class="inputLable">
-                <input type="radio" id="typeAll" name="type" value="all" hidden>
+                <input type="radio" class="typeButton" id="typeAll" name="type" value="all" hidden <?php if (!empty($_GET["type"])) {if ($_GET["type"] == "all") {echo "checked";}} ?>>
                 <label for="typeAll">All</label>
               </div>
               <div class="inputLable">
-                <input type="radio" id="typeBike" name="type" value="bike" hidden>
+                <input type="radio" class="typeButton" id="typeBike" name="type" value="bike" hidden <?php if (!empty($_GET["type"])) {if ($_GET["type"] == "bike") {echo "checked";}} ?>>
                 <label for="typeBike">Bikes</label>
               </div>
               <div class="inputLable">
-                <input type="radio" id="typeScooter" name="type" value="scooter" hidden>
+                <input type="radio" class="typeButton" id="typeScooter" name="type" value="scooter" hidden <?php if (!empty($_GET["type"])) {if ($_GET["type"] == "scooter") {echo "checked";}} ?>>
                 <label for="typeScooter">Scooters</label>
               </div>
             </div>
@@ -88,12 +95,12 @@
       <div id="content">
         <div id="searchBar">
           <div id="searchBarInput">
-            <input type="search" form="filterForm" id="searchBarS" name="search" placeholder="search">
+            <input type="search" form="filterForm" id="searchBarS" name="search" placeholder="search" value="<?php if(!empty($_GET["search"])) echo $_GET["search"]; ?>">
             <label for="searchBarBy">sort by:</label>
             <select form="filterForm" id="searchBarBy" name="filterBy">
-              <option value="popularity" selected>popularity</option>
-              <option value="pricea">price (from lowest)</option>
-              <option value="priced">price (from highest)</option>
+              <option value="popularity" <?php if (empty($_GET["filterBy"]) || ($_GET["filterBy"] == "popularity")) echo "selected"; ?>>popularity</option>
+              <option value="pricea" <?php if(!empty($_GET["filterBy"])) {if($_GET["filterBy"] == "pricea") {echo "selected";}} ?>>price (from lowest)</option>
+              <option value="priced" <?php if(!empty($_GET["filterBy"])) {if($_GET["filterBy"] == "priced") {echo "selected";}} ?>>price (from highest)</option>
             </select>
           </div>
           <input type="button" id="searchBarSB" value=">">
