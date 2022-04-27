@@ -461,13 +461,19 @@
   }
 
   .searchResultImage {
-    float: right;
+    position:absolute;
+    right: 20px;
+    top: 45px;
     text-align: center;
     margin-top: -1.7em;
   }
 
   .searchResultButton input{
     margin-right: 15px;
+  }
+
+  .searchResultDesc {
+    width: calc(100% - 300px);
   }
 
   .searchResultButton form {
