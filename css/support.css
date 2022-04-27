@@ -4,10 +4,174 @@
   margin-right: auto;
 }
 
-#successField p{
+#emailField {
+  position: relative;
+  margin-top: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: white;
+}
+
+#emailField input {
+  font-size: 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #e2e2e2;
+  border: none;
+  width: calc(40% - 10px);
+}
+
+#emailField a {
+  transform: translate(0%, 0);
+  background-color: #23b890;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px 30px;
+  font-size: 20px;
+  transition: background-color 0.2s;
+}
+
+#emailField a:hover {
+  background-color: #1fd4a2;
+}
+
+#emailField p {
+  font-size: 25px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+#formFields {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+#formFields label{
+  text-align: left
+}
+
+#formFields p {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+#formFields p:nth-child(1) {
+  margin-top: 0;
+}
+
+#successField, #errorField {
+  padding: 0px 20px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+#successField {
+  border: 1px solid darkgreen;
+  background-color: #9affba;
+}
+
+#errorField  {
+  border: 1px solid darkred;
+  background-color: #d39696;
+}
+
+#successField p {
+  font-size: 25px;
+  margin: 2px;
   color: darkgreen;
 }
 
-#errorField p{
-  color: darkred;
+#errorField p {
+  font-size: 25px;
+  margin: 2px;
+  color: #4d3838;
+}
+
+#problemHeader, #problemType, #problemText {
+  font-size: 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #e2e2e2;
+  border: none;
+  width: calc(100% - 10px);
+}
+
+#problemType {
+  width: 100%;
+}
+
+#problemText {
+  resize: none;
+  height: 400px;
+}
+
+#submitButton input {
+  color:white;
+  background-color: #454242;
+  font-size: 25px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#submitButton input:hover {
+  background-color: #211d1d;
+}
+
+#submitButton input:active {
+  background-color: #000000;
+}
+
+/* ############################################################################################################ */
+/* ########################################### MEDIA ########################################################## */
+/* ############################################################################################################ */
+
+@media (min-width: 1020px) {
+  #submitButton {
+    margin-left: calc(100% - 120px);
+  }
+}
+
+@media (max-width: 1019px) {
+  #submitButton {
+    text-align: center;
+  }
+
+  #submitButton input {
+    width: min(80vw, 100px);
+  }
+}
+
+@media (min-width: 600px) {
+  #emailField a {
+    position: absolute;
+    right: 10%;
+    transform: translate(0%, 0);
+    top: 10px;
+  }
+
+  #emailField p {
+    position: absolute;
+    left:50%;
+    transform: translate(-50%, 0);
+    top: 10px;
+  }
+}
+
+@media (max-width: 599px) {
+  #emailField {
+    text-align: center;
+  }
+
+  #emailField a {
+    padding: 0px 10vw;
+  }
 }

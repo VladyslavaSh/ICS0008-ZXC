@@ -123,37 +123,36 @@
             }
           }
         ?>
-        <form class="" action="./support.php" method="post">
+        <form action="./support.php" method="post">
           <?php if(empty($_SESSION["email"])) {
-            echo '<label for="emailInput">Your email</label><br>';
-            echo '<input type="email" id="emailInput" name="email" value="" placeholder="you@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="255" required>';
-            echo '<abbr title="This information is needed to contact you">?</abbr>';
+            echo '<div id="emailField"><label for="emailInput">Please enter your email</label><br><input type="email" id="emailInput" name="email" value="';
+            if (!empty($_POST["email"])) {
+              echo $_POST["email"];
+            }
+            echo '" placeholder="you@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="255" required><p>OR</p><a href="./login.php">Login</a></div>';
           } ?>
-          <br>
-          <label for="problemType">What type of problem have occured with you?</label>
-          <br>
-          <select id="problemType" name="problemType" required>
-            <option value="">Please select one</option>
-            <option value="rent_mistake">I have rented a vehicle by mistake</option>
-            <option value="payment">I have some difficulties with payment system</option>
-            <option value="refund">I would want to have a refund</option>
-            <option value="bug">I have noticed a bug on this website</option>
-            <option value="service">I have some troubles with your service</option>
-            <option value="other">My problem is not in this list</option>
-          </select>
-          <br>
-          <label for="problemHeader">What this problem is about?</label>
-          <br>
-          <input id="problemHeader" type="text" name="problemHeader" value="" maxlength="50" size="60" required>
-          <br>
-          <label for="problemText">Please describe it fully</label>
-          <br>
-          <textarea id="problemText" name="problemText" rows="8" cols="80" maxlength="10000"></textarea>
-          <br>
-          <input type="checkbox" id="agreeBox" required>
-          <label for="agreeBox">I have read the <a href="./policy.php">Terms and Conditions</a></label>
-          <br>
-          <input type="submit" name="" value="Submit">
+          <div id="formFields">
+            <p><label for="problemType">What type of problem have occured with you?</label></p>
+            <select id="problemType" name="problemType" required>
+              <option value="">Please select one</option>
+              <option value="rent_mistake" <?php if (!empty($_POST["problemType"])) {if ($_POST["problemType"] == "rent_mistake") {echo "selected";}} ?>>I have rented a vehicle by mistake</option>
+              <option value="payment" <?php if (!empty($_POST["problemType"])) {if ($_POST["problemType"] == "payment") {echo "selected";}} ?>>I have some difficulties with payment system</option>
+              <option value="refund" <?php if (!empty($_POST["problemType"])) {if ($_POST["problemType"] == "refund") {echo "selected";}} ?>>I would want to have a refund</option>
+              <option value="bug" <?php if (!empty($_POST["problemType"])) {if ($_POST["problemType"] == "bug") {echo "selected";}} ?>>I have noticed a bug on this website</option>
+              <option value="service" <?php if (!empty($_POST["problemType"])) {if ($_POST["problemType"] == "service") {echo "selected";}} ?>>I have some troubles with your service</option>
+              <option value="other" <?php if (!empty($_POST["problemType"])) {if ($_POST["problemType"] == "other") {echo "selected";}} ?>>My problem is not in this list</option>
+            </select>
+            <p><label for="problemHeader">What this problem is about?</label></p>
+            <input id="problemHeader" type="text" name="problemHeader" value="<?php if (!empty($_POST["problemHeader"])) echo $_POST["problemHeader"]; ?>" maxlength="50" size="60" required>
+            <p><label for="problemText">Give us more information about it</label></p>
+            <textarea id="problemText" name="problemText" maxlength="10000"><?php if (!empty($_POST["problemText"])) echo $_POST["problemText"]; ?></textarea>
+            <br>
+            <input type="checkbox" id="agreeBox" required>
+            <label for="agreeBox">I have read the <a href="./policy.php">Terms and Conditions</a></label>
+          </div>
+          <div id="submitButton">
+            <input type="submit" name="" value="Submit">
+          </div>
         </form>
       </div>
     </div>
