@@ -7,7 +7,7 @@
   <head>
     <?php include "./php/tpl/head.php"; ?>
     <link rel="stylesheet" href="./css/policy.css">
-    <title>Terms</title>
+    <title>Policy - ZXC</title>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>

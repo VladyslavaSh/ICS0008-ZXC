@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
 ?>
 
@@ -7,7 +7,7 @@
   <head>
   <?php include "./php/tpl/head.php"; ?>
   <link rel="stylesheet" href="./css/about.css">
-  <title>About us</title>
+  <title>About us - ZXC</title>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
