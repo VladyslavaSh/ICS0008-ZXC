@@ -112,15 +112,17 @@
     $data = array_merge($data, $model_data);
 
     function model_count_check($link, $model) {
-      $query = "SELECT COUNT(model_id) FROM zxc_vehicle WHERE model_id=? AND status='available'";
+      $query = "SELECT COUNT(model_id), office_id FROM zxc_vehicle WHERE model_id=? AND status='available' GROUP BY office_id";
       $stmt = mysqli_prepare($link, $query);
       mysqli_stmt_bind_param($stmt, "i", $model);
       mysqli_stmt_execute($stmt);
-      mysqli_stmt_bind_result($stmt, $model_count);
-      mysqli_stmt_fetch($stmt);
-
-      if($model_count > 0) {
-        $data = array("model_count" => $model_count);
+      mysqli_stmt_bind_result($stmt, $model_count, $model_count_office_id);
+      mysqli_stmt_store_result($stmt);
+      if(mysqli_stmt_num_rows($stmt) > 0) {
+        $data = [];
+        while(mysqli_stmt_fetch($stmt)) {
+          $data[$model_count_office_id] = $model_count;
+        }
         return $data;
       }
       else {
@@ -129,7 +131,7 @@
     }
 
     $model_count_data = model_count_check($link, $model);
-    if ($model_count_data != 1) $data = array_merge($data, $model_count_data);
+    if ($model_count_data != 1) $data["model_count"] = $model_count_data;
 
     function user_data_check($link) {
       $query = "SELECT ID, first_name, last_name, phone FROM zxc_account WHERE email=?";
@@ -156,11 +158,11 @@
 
   $data = main();
 
-
-
   // VALIDATION TIME
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     function validation($data){
+
+
 
       $fields = ["nameFirst", "nameLast", "phone", "quantity", "time", "office", "checkbox", "msg"];
       $required = ["quantity", "time", "office", "checkbox"];
@@ -226,18 +228,6 @@
 
       if(phone_check($phone)) return 7;
 
-      function quantity_check(&$quantity, $count) {
-        if($quantity < 1 || $quantity > $count) return 1;
-      }
-
-      if(quantity_check($quantity, $data["model_count"])) return 8;
-
-      function time_check(&$time) {
-        if($time < 1 || $time > 12) return 1;
-      }
-
-      if(time_check($time)) return 9;
-
       function office_arr_check(&$office_to_check, &$offices) {
         $data = [];
         for($i=0;$i<count($offices);$i++) {
@@ -249,8 +239,23 @@
         return 1;
       }
 
-      $office_id = office_arr_check($office, $data["offices"]);
-      if ($office_id == 1) return 10;
+      $office_id_arr = office_arr_check($office, $data["offices"]);
+      if ($office_id_arr == 1) return 10;
+      $office_id = $office_id_arr[0];
+
+      function quantity_check(&$quantity, $count) {
+        if($quantity < 1 || $quantity > $count) return 1;
+      }
+
+      if(!isset($data["model_count"][$office_id])) return 12;
+
+      if(quantity_check($quantity, $data["model_count"][$office_id])) return 8;
+
+      function time_check(&$time) {
+        if($time < 1 || $time > 12) return 1;
+      }
+
+      if(time_check($time)) return 9;
 
       function msg_check(&$msg) {
         if(strlen($msg) > 255) return 1;
@@ -264,18 +269,30 @@
         die("Connection failed: ".mysqli_connect_error());
       }
 
-
+      // adding order to zxc_previous_orders table
       $query = "INSERT INTO zxc_previous_orders (first_name, last_name, phone, amount, message, office_id, account_ID, model_id, rented_until, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? HOUR), 'completed')";
       $stmt = mysqli_prepare($link, $query);
-      mysqli_stmt_bind_param($stmt, "ssiisiiis", $first_name, $last_name, $phone, $quantity, $msg, $office_id[0], $data["account_id"], $data["model_id"], $time);
+      mysqli_stmt_bind_param($stmt, "ssiisiiis", $first_name, $last_name, $phone, $quantity, $msg, $office_id, $data["account_id"], $data["model_id"], $time);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_close($stmt);
+
+      // updating a vehicle of the first available zxc_vehicle table
+      $query = "UPDATE zxc_vehicle SET status = 'rented', rented_by=?, rented_when=NOW(), rented_until=date_add(NOW(), INTERVAL ? hour) WHERE model_id=? AND office_id=? AND status = 'available' LIMIT ?";
+      $stmt = mysqli_prepare($link, $query);
+      mysqli_stmt_bind_param($stmt, "sssii", $data["account_id"], $time, $data["model_id"], $office_id, $quantity);
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_close($stmt);
+
+      // incrementing total_rented in zxc_model table
+      $query = "UPDATE zxc_model SET total_rented=total_rented + ? WHERE id=?";
+      $stmt = mysqli_prepare($link, $query);
+      mysqli_stmt_bind_param($stmt, "ii", $quantity, $data["model_id"]);
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_close($stmt);
+
       mysqli_close($link);
       header("Location: account.php");
       die();
-      return 0;
-
-      echo $office_id;
       return 0;
     }
     $result = validation($data);
@@ -291,6 +308,46 @@
     <title>Rent - ZXC</title>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        let amount = <?php if(isset($data["model_count"][$data["office_id"]])) 
+        {
+          echo ($data["model_count"][$data["office_id"]]);
+        }
+        else {
+          echo 0;
+        }
+          ?>;
+        function change() {
+          <?php
+            $JSON = json_encode($data["offices"]);
+            $JSON2 = json_encode($data["model_count"]);
+          ?>
+
+          let stock = document.getElementById("stock");
+          let quantity = document.getElementsByClassName("quantity_button")[0].children[1];
+          let officeIDs = <?php echo $JSON2;?>;
+          let officeNames = <?php echo $JSON;?>;
+
+          for (let i=0;i<officeNames.length;i++) {
+            if(officeNames[i] === this.value) {
+              quantity.value = 1;
+              if(officeIDs[i+1]) {
+                amount = officeIDs[i+1];
+                stock.style.color = "black";
+                stock.innerHTML = "In stock: "+amount;
+                quantity.setAttribute("max", amount);
+              }
+              else{
+                amount = 0;
+                stock.style.color = "red";
+                stock.innerHTML = "Out of stock";
+                quantity.setAttribute("max", 0);
+              }
+            }
+          }
+        }
+        document.getElementById("office").addEventListener("change", change);
+
+        // COUNTER + -
         let minuses = document.getElementsByClassName("minus");
         let pluses = document.getElementsByClassName("plus");
 
@@ -310,7 +367,7 @@
           if(!quantity) quantity_field.value = 1;
 
           if(e.target.parentNode.className == "quantity_button") {
-            if(quantity+1 <= <?php echo $data["model_count"];?>) { // I was forced to put js script directly, because of this
+            if(quantity+1 <= amount) {
               quantity++;
               quantity_field.value = quantity;
             }
@@ -371,6 +428,9 @@
             elseif ($result == 11){
               echo "Message cannot be more than 255 chars long";
             }
+            elseif ($result == 12){
+              echo "Out of stock";
+            }
             if ($result != 0) echo "</div>";
           }
         ?>
@@ -391,7 +451,17 @@
                 <p>Price: <?php echo $data["price"];?>/hr</p>
               </div>
               <div>
-                <p>In stock: <?php echo $data["model_count"]?></p>
+                <p id="stock" <?php if(!isset($data["model_count"][$data["office_id"]])) echo "style=color:red;"?>>
+                <?php
+                  if(isset($data["model_count"][$data["office_id"]])) {
+                    echo "In stock: ".$data["model_count"][$data["office_id"]];
+                  }
+                  else {
+                    echo "Out of stock";
+                  }
+
+                ?>
+                </p>
               </div>
             </div>
           </div>
@@ -409,7 +479,14 @@
                 <label for="quantity">Quantity</label>
                 <div class="quantity_button">
                   <button type="button" class="minus"> - </button>
-                  <input type="number" class="quantity" name="quantity" min="1" value="1" max="<?php echo $data["model_count"];?>">
+                  <input type="number" class="quantity" name="quantity" min="1" value="1" max="<?php
+                  if(isset($data["model_count"][$data["office_id"]])) {
+                    echo $data["model_count"][$data["office_id"]];
+                  }
+                  else {
+                    echo "0";
+                  }
+                  ?>">
                   <button type="button" class="plus"> + </button>
                 </div>
               </div>
@@ -427,7 +504,7 @@
               <select id="office" name="office" required>
                 <?php
                   for($i=0;$i<count($data["offices"]);$i++) { ?>
-                    <option value="<?php echo $data["offices"][$i];?>" <?php if($_GET["office"] == $i) echo "selected";?>><?php echo ($data["offices"][$i]);?></option>
+                    <option value="<?php echo $data["offices"][$i];?>" <?php if($_GET["office"] == $i+1) echo "selected";?>><?php echo ($data["offices"][$i]);?></option>
                   <?php
                   }
                 ?>
