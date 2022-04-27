@@ -21,10 +21,12 @@
       <div class="form">
         <form class="" action="./support.php" method="post">
           <?php if(empty($_SESSION["email"])) {
-            echo '<input type="email" name="email" value="" placeholder="you@example.com">';
+            echo '<label for="emailInput">Your email</label>';
+            echo '<input type="email" id="emailInput" name="email" value="" placeholder="you@example.com">';
           } ?>
           <br>
-          <select class="" name="type">
+          <label for="problemType">What type of problem have occured with you?</label>
+          <select id="problemType" name="type">
             <option value="">Please select one</option>
             <option value="rent_mistake">I have rented a vehicle by mistake</option>
             <option value="payment">I have some difficulties with payment system</option>
@@ -34,9 +36,11 @@
             <option value="other">My problem is not in this list</option>
           </select>
           <br>
-          <input type="text" name="header" value="" required>
+          <label for="problemHeader">What this problem is about?</label>
+          <input id="problemHeader" type="text" name="header" value="" required>
           <br>
-          <textarea name="text" rows="8" cols="80"></textarea>
+          <label for="problemText">Please describe it fully</label>
+          <textarea id="problemText" name="text" rows="8" cols="80"></textarea>
           <br>
           <input type="submit" name="" value="Submit">
         </form>
