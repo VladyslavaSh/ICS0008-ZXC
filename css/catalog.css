@@ -117,6 +117,7 @@
   border: none;
   outline: none;
   font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .inputLable label {
@@ -477,10 +478,15 @@
     position:relative;
     top: -3px;
   }
+
+  .searchResultEnd {
+    width: 60vw;
+    height: 100px;
+  }
 }
 
 @media (max-width: 1019px) {
-  .searchResult {
+  .searchResult, .searchResultEnd {
     width: max(60vw, 300px);
     margin-left: auto;
     margin-right: auto;
@@ -514,6 +520,17 @@
   background: linear-gradient(#ffffff, #f0f2f2);
   padding: 2vh 20px;
   border-radius: 1em;
+}
+
+.searchResultEnd {
+  margin-top: 20px;
+  background: linear-gradient(#ffffee, #f0f2d2);
+  padding: 2vh 20px;
+  border-radius: 1em 1em 0 0;
+}
+
+.searchResultEnd h2, .searchResultEnd p {
+  text-align: center;
 }
 
 .searchResultImage {

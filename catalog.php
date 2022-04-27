@@ -16,6 +16,8 @@
     }
     $dbcon->close_cursor($cursor);
   }
+
+  $max = 10;
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +27,7 @@
     <link rel="stylesheet" href="./css/catalog.css">
     <title>Catalog - ZXC</title>
     <script src="./js/multiRangeSlider.js" type="text/javascript" defer></script>
+    <script src="./js/catalogLoader.js" type="text/javascript" defer></script>
   </head>
   <body>
     <?php include "./php/tpl/navbar.php"; ?>
@@ -59,8 +62,8 @@
             </div>
             <p>Price range</p>
             <div id="priceSlider" class="multiRangeSlider">
-              <input type="range" class="inputLeft" min="0" max="100" value="0">
-              <input type="range" class="inputRight" min="0" max="100" value="100">
+              <input type="range" class="inputLeft" min="0" max="<?php echo $max; ?>" value="0">
+              <input type="range" class="inputRight" min="0" max="<?php echo $max; ?>" value="<?php echo $max; ?>">
               <div class="slider">
                 <div class="track"></div>
                 <div class="range"></div>
@@ -69,8 +72,8 @@
               </div>
               <div class="sliderLabel">
                 <span class="sliderSpan">
-                  <span class="inputSpan"><input type="number" id="priceMin" name="priceMin">€</span> -
-                  <span class="inputSpan"><input type="number" id="priceMax" name="priceMax">€</span>
+                  <span class="inputSpan"><input type="number" class="priceMin" name="priceMin" min="0" max="<?php echo $max; ?>" value="0">€</span> -
+                  <span class="inputSpan"><input type="number" class="priceMax" name="priceMax" min="0" max="<?php echo $max; ?>" value="<?php echo $max; ?>">€</span>
                 </span>
               </div>
             </div>
@@ -88,8 +91,8 @@
             <label for="searchBarBy">sort by:</label>
             <select form="filterForm" id="searchBarBy" name="filterBy">
               <option value="popularity" selected>popularity</option>
-              <option value="price ASC">price (from lowest)</option>
-              <option value="price DESC">price (from highest)</option>
+              <option value="pricea">price (from lowest)</option>
+              <option value="priced">price (from highest)</option>
             </select>
           </div>
           <input type="button" id="searchBarSB" value=">">
@@ -99,6 +102,7 @@
           <?php include "./php/tpl/search_result.php"?>
           <?php include "./php/tpl/search_result.php"?>
           <?php include "./php/tpl/search_result.php"?>
+          <?php include "./php/tpl/search_end.php"?>
             <!-- There is a huge mess, so this table will be managed by js script, which will download the results as we go deeper -->
         </div>
       </div>

@@ -14,7 +14,7 @@
       <form action="./rent.php" method="get">
         <input type="submit" name="" value="Rent now!" {IS_DISABLED}>
         <input type="text" name="model" value="{MODEL}" hidden>
-        <input type="office" name="office" value="{OFFICE}" hidden>
+        {OFFICE}
       </form>
       {AVAILABILITY}
       <p class="smallPortion">There is {PRODUCT_NUM} left!</p>
