@@ -3,11 +3,13 @@
 ?>
 
 <?php
+  //redirect to login.php
   if (!isset($_SESSION["email"])) {
     $_SESSION["redirect"] = $_SERVER['REQUEST_URI'];
     header("Location: login.php");
     die();
   }
+
 
   function main() {
 
@@ -25,6 +27,7 @@
       die();
     }
 
+    //sets the fields
     function set_fields(&$fields){
       foreach($fields as $field) {
           if(!isset($_GET[$field])) {
@@ -35,6 +38,7 @@
 
     set_fields($fields);
 
+    //check if the required fields is not empty
     function required_check(&$required){
       foreach($required as $field) {
           if(empty(trim($_GET[$field]))) {
@@ -47,8 +51,9 @@
 
     $model = $_GET["model"];
     $office_ID = $_GET["office"];
-    $data = [];
+    $data = []; // main array containing almost everything
 
+    // checks and write data of the given office id from $_GET to array
     function office_check($link, $office_ID) {
       $query = "SELECT ID, name, address, post FROM zxc_offices WHERE ID=?";
       $stmt = mysqli_prepare($link, $query);
@@ -74,6 +79,7 @@
       $data = array_merge($data, $office_data);
     }
 
+    // checks and write data of all the offices to array
     function offices_get($link) {
       $query = "SELECT name FROM zxc_offices";
       $stmt = mysqli_prepare($link, $query);
@@ -89,6 +95,7 @@
     $offices_data = offices_get($link);
     $data["offices"] = $offices_data;
 
+    //checks and write data of the given model id from $_GET to array
     function model_check($link, $model) {
       $query = "SELECT ID, name, description, price_hr, image FROM zxc_model WHERE ID=?";
       $stmt = mysqli_prepare($link, $query);
@@ -111,6 +118,7 @@
     if ($model_data == 1) redirect();
     $data = array_merge($data, $model_data);
 
+    // checks and write data of the given model id in form of $data["office_id"] = "this_model_amount" from $_GET to array
     function model_count_check($link, $model) {
       $query = "SELECT COUNT(model_id), office_id FROM zxc_vehicle WHERE model_id=? AND status='available' GROUP BY office_id";
       $stmt = mysqli_prepare($link, $query);
@@ -133,6 +141,7 @@
     $model_count_data = model_count_check($link, $model);
     if ($model_count_data != 1) $data["model_count"] = $model_count_data;
 
+    // checks and write user data from $_SESSION["email] to array
     function user_data_check($link) {
       $query = "SELECT ID, first_name, last_name, phone FROM zxc_account WHERE email=?";
       $stmt = mysqli_prepare($link, $query);
@@ -158,11 +167,18 @@
 
   $data = main();
 
+  // to understand whether a vehicle exists with such office_id
+  if(isset($data["model_count"][$data["office_id"]])) {
+    $amount = $data["model_count"][$data["office_id"]];
+    $data["flag"] = 1;
+  }
+  else {
+    $data["flag"] = 0;
+  }
+
   // VALIDATION TIME
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     function validation($data){
-
-
 
       $fields = ["nameFirst", "nameLast", "phone", "quantity", "time", "office", "checkbox", "msg"];
       $required = ["quantity", "time", "office", "checkbox"];
@@ -190,6 +206,7 @@
 
       if(empty_check($required)) return 4;
 
+      // checks for html tags injections
       function html_inj(&$fields) {
         foreach($fields as $field) {
           $clear = strip_tags($_POST[$field]);
@@ -228,6 +245,7 @@
 
       if(phone_check($phone)) return 7;
 
+      // checks whether sent office is really exists
       function office_arr_check(&$office_to_check, &$offices) {
         $data = [];
         for($i=0;$i<count($offices);$i++) {
@@ -308,9 +326,9 @@
     <title>Rent - ZXC</title>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        let amount = <?php if(isset($data["model_count"][$data["office_id"]])) 
+        let amount = <?php if($data["flag"])
         {
-          echo ($data["model_count"][$data["office_id"]]);
+          echo $amount;
         }
         else {
           echo 0;
@@ -451,10 +469,10 @@
                 <p>Price: <?php echo $data["price"];?>/hr</p>
               </div>
               <div>
-                <p id="stock" <?php if(!isset($data["model_count"][$data["office_id"]])) echo "style=color:red;"?>>
+                <p id="stock" <?php if(!$data["flag"]) echo "style=color:red;"?>>
                 <?php
-                  if(isset($data["model_count"][$data["office_id"]])) {
-                    echo "In stock: ".$data["model_count"][$data["office_id"]];
+                  if($data["flag"]) {
+                    echo "In stock: ".$amount;
                   }
                   else {
                     echo "Out of stock";
@@ -480,8 +498,8 @@
                 <div class="quantity_button">
                   <button type="button" class="minus"> - </button>
                   <input type="number" class="quantity" name="quantity" min="1" value="1" max="<?php
-                  if(isset($data["model_count"][$data["office_id"]])) {
-                    echo $data["model_count"][$data["office_id"]];
+                  if($data["flag"]) {
+                    echo $amount;
                   }
                   else {
                     echo "0";

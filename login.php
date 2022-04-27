@@ -69,6 +69,7 @@
         }
       }
 
+      // checks html tags injections
       if(html_inj($fields)) return 11;
 
       function email_check(&$email) {
@@ -109,7 +110,7 @@
         $first_name = trim($_POST["nameFirst"]);
         $last_name = trim($_POST["nameLast"]);
 
-        // duplicate check
+        // duplicate email check
         $query = "SELECT email FROM zxc_account WHERE email=?";
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "s", $email);
@@ -185,7 +186,8 @@
     }
 
     $result = main();
-
+    
+    // just to give class "active" on page reload correctly
     if ($result==6||$result==7||$result==8||$result==9) {
       $formLoad = 1;
     }
@@ -199,7 +201,7 @@
     <script src="./js/login.js" type="text/javascript"></script>
     <title>Login - ZXC</title>
     <style>
-      <?php if($formLoad==0) {
+      <?php if($formLoad==0) { // just to give class "active" on page reload correctly
         echo "#Register";
       } else {
         echo "#Log-In";

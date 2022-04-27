@@ -7,6 +7,7 @@
     die("Connection failed: ".mysqli_connect_error());
   }
 
+  // get array of offices positions to display offices further using js and google api
   $offices = [];
   $query = "SELECT coordinateX, coordinateY FROM zxc_offices";
   $stmt = mysqli_prepare($link, $query);
@@ -79,6 +80,7 @@
 
       <div id="map"></div>
       <script>
+        // The only reason why script is here is just, because of inserting php data to google api
         function initMap(){
           let map_options = {
               zoom:13,
