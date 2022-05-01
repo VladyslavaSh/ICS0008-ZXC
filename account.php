@@ -58,7 +58,7 @@ $result_orders = $result_orders -> fetch_all();
 //Support Configuration
 $query = "SELECT * FROM zxc_support_tickets WHERE email=?";
 $support_stmt = $db_con -> prepare($query);
-$support_stmt -> bind_param("i", $ses_email);
+$support_stmt -> bind_param("s", $ses_email);
 $support_stmt -> execute();
 $result = $support_stmt -> get_result();
 $result = $result -> fetch_all();
@@ -69,7 +69,7 @@ $result = $result -> fetch_all();
 
 <?php if(isset($_SESSION['email'])):?>
 
-
+<div class="main">
 <div class="wrapper">
     <div id='data'>
         <h2>Your personal data</h2>
@@ -87,7 +87,6 @@ $result = $result -> fetch_all();
         <h2>Your orders</h2>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Status</th>
                 <th>Amount</th>
                 <th>Model name</th>
@@ -97,7 +96,6 @@ $result = $result -> fetch_all();
             </tr>
             <?php foreach($result_orders as $row):?>
                 <tr>
-                    <td><?=$row[0]?></td>
                     <td><?=$row[1]?></td>
                     <td><?=$row[2]?></td>
                     <td><?=$row[6]?></td>
@@ -112,7 +110,6 @@ $result = $result -> fetch_all();
         <h2>Your support requests</h2>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Status</th>
                 <th>Type</th>
                 <th>Header</th>
@@ -120,7 +117,6 @@ $result = $result -> fetch_all();
             </tr>
             <?php foreach($result as $row):?>
             <tr>
-                <td><?=$row[0]?></td>
                 <td><?=$row[3]?></td>
                 <td><?=$row[4]?></td>
                 <td><?=$row[5]?></td>
@@ -130,11 +126,10 @@ $result = $result -> fetch_all();
         </table>
     </div>
 </div>
-
+</div>
 <?php endif;?>
 
+<?php include "./php/tpl/footer.php"; ?>
 
 </body>
 </html>
-
-<?php include "./php/tpl/footer.php"; ?>

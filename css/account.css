@@ -9,7 +9,6 @@
 table {
     border-collapse: collapse;
     width: 95vw;
-    display: block;
     padding-bottom: 50px;
     text-align: center;
     margin: 0 auto;
@@ -22,7 +21,7 @@ table {
 td, th {
     border: 1px solid gray;
     font-weight: lighter;
-    width: calc(100% / 7);
+    width: calc(100% / 6);
 }
 
 #data, .support, .orders{

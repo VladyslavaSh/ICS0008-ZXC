@@ -23,7 +23,8 @@
 $patterns = [
     'name' => "\b^[a-zA-Z-'^\s]*$",
     'email' => '^[\w]+@[\w]+\.[\w]+$',
-    'phone' => "^$|^[[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{1}[-\s\.]?[0-9]{1,9}]*$"
+    //'phone' => "^$|^[[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{1}[-\s\.]?[0-9]{1,9}]*$"
+    'phone' => "^[0-9]{4,15}$"
 ];
 
 require_once("db_connect.php");
@@ -75,7 +76,7 @@ $result = $result->fetch_assoc();
 
 <?php if(isset($_SESSION['email'])):?>
 
-
+<div class="main">
 <h2>Edit your account</h2>
 
     <?php if($error == true):?>
@@ -92,19 +93,17 @@ $result = $result->fetch_assoc();
     <label>Age</label>
     <input type="number" name="age" value="<?=$result['age']?>" min="16" max="100">
     <label>Phone number</label>
-    <input type="tel" name="tel" value="<?=$result['phone']?>" pattern="<?= $patterns['phone'] ?>">
+    <input type="tel" name="tel" value="<?=$result['phone']?>" pattern="<?= $patterns['phone']?>">
     <label>Pronouns</label>
     <input type="text" name="pron" value="<?=$result['pronouns']?>">
 
     <a href="password_edit.php" class="editpass">Edit password</a>
 
     <input type="submit" value="Save Changes">
-
 </form>
+</div>
 <?php endif;?>
 
-
+<?php include "./php/tpl/footer.php"; ?>
 </body>
 </html>
-
-<?php include "./php/tpl/footer.php"; ?>
