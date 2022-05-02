@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <?php include "./php/tpl/navbar.php"; ?>
-
+<div class="main">
 <h2>Edit your password</h2>
 
 <?php if($error == true):?>
@@ -71,7 +71,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input type="submit" value="Save Changes">
 
 </form>
-
+</div>
 <?php include "./php/tpl/footer.php"; ?>
 </body>
 </html>
