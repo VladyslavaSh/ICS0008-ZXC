@@ -2,3 +2,4 @@
 <meta charset="utf-8">
 <meta name="author" content="ZXC Team">
 <link rel="stylesheet" href="./css/main.css">
+<script src="./js/nav.js" defer></script>
